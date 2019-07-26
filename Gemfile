@@ -33,6 +33,7 @@ group :development, :test do
   gem 'overcommit'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'shoulda-matchers'
   gem 'reek'
   gem 'rspec-rails'
   gem 'rubocop'
