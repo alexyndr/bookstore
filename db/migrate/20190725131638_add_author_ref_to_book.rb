@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAuthorRefToBook < ActiveRecord::Migration[6.0]
   def change
     add_reference :books, :author, foreign_key: true
