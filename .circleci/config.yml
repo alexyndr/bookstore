@@ -8,9 +8,13 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
       - image: circleci/postgres:11-alpine
         environment:
-          POSTGRES_USER: bookstore
+          POSTGRES_USERdsdsds: root
           POSTGRES_DB: bookstore_test
           POSTGRES_PASSWORD: ""
 
