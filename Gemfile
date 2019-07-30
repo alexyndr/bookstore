@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'ffaker'
   gem 'overcommit'
+  gem 'haml'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'shoulda-matchers'
