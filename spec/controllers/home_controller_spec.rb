@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe HomeController, type: :controller do
   describe 'when #index' do
     before do

@@ -29,6 +29,8 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'simplecov'
+  gem 'capybara'
 end
 
 group :development do

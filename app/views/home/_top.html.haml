@@ -1,0 +1,13 @@
+.row
+  .col-sm-5
+    .general-img-wrap
+      %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+  .col-sm-7
+    .mb-60
+      %h1= @book.title
+      %p.lead= @book.description
+      %p.lead.small
+        - @book.authors.each do |author|
+          = author.name
+      .general-align
+        %button.btn.btn-primary Buy Now
