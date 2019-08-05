@@ -7,3 +7,6 @@ exclude_paths:
   - app/mailers/application_mailer.rb
   - config/
   - db/
+detectors:
+  IrresponsibleModule:
+      enabled: false

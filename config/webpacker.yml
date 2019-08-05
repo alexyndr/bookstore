@@ -75,7 +75,7 @@ development:
       ignored: '**/node_modules/**'
 
 
-test:
+test: 
   <<: *default
   compile: true
 

@@ -1,0 +1,29 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand Bookstore
+      %a.shop-link.pull-right.visible-xs{href: "#"}
+        %span.shop-icon
+          %span.shop-quantity 3
+    %a.shop-link.pull-right.hidden-xs{href: "#"}
+      %span.shop-icon
+        %span.shop-quantity 3
+    #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li
+            %a{href: "/"} Home
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+            %ul.dropdown-menu
+              %li
+                %a{href: "/books"} Shop
+              %li
+                %a{href: "#"} Log out
+          %li
+            %a{href: "#"} My account
