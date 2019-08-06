@@ -9,7 +9,7 @@
           %a.thumb-hover-link{href: "#"}
             %i.fa.fa-shopping-cart.thumb-icon
   .general-thumb-info
-    %p.title Android Programming for Beginners
+    %p.title= @one.title
     %p.font-16.in-gold-500 €28.50
     %span.divider-sm
-    %p.lead.small Bass Jobsen, David Cochran, Ian Whitley
+    %p.lead.small= @one.description.truncate_words(7)

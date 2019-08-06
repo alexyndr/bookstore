@@ -29,5 +29,9 @@ end
 
 generate_category
 10.times { generate_book }
+sleep 3
+Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3)).save!
+sleep 3
+Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3)).save!
 4.times { generate_author }
 generate_authors_book

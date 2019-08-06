@@ -1,12 +1,8 @@
-exclude_paths:
-  - app/controllers/application_controller.rb
-  - app/channels/
-  - app/models/application_record.rb
-  - app/helpers/application_helper.rb
-  - app/jobs/application_job.rb
-  - app/mailers/application_mailer.rb
-  - config/
-  - db/
 detectors:
   IrresponsibleModule:
       enabled: false
+      exclude: []
+exclude_paths:
+  - app/channels/
+  - config/
+  - db/

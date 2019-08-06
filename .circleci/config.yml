@@ -47,8 +47,14 @@ jobs:
             bundle exec rake db:schema:load
 
       - run:
-          name: linters
-          command: bundle exec overcommit --run
+         name: Precompile assets
+         command: bundle exec rake assets:precompile
+
+      - run:
+          name: Running overcommit
+          command: |
+            bundle exec overcommit -s
+            SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
 
       - run:
           name: run tests
