@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.filter-link.active{ 
+  color: black;
+}
+
 .in-white {
   color: white !important;
 }
@@ -8075,9 +8079,9 @@ button.close {
 }
 
 .thumb-icon {
-  font-size: 16px;
+  font-size: 16px !important;
   color: white;
-  line-height: 36px;
+  line-height: 36px !important;
 }
 
 .title {

@@ -3,7 +3,7 @@
 require 'ffaker'
 
 def generate_book
-  book = Book.new(title: FFaker::Book.title, description: FFaker::Book.description(5), category_id: rand(1..3))
+  book = Book.new(title: FFaker::Book.title, description: FFaker::Book.description(5), category_id: rand(1..3), price: price)
   book.save!
 end
 
@@ -27,11 +27,15 @@ def generate_authors_book
   end
 end
 
+def price
+  rand(16.0..31.0).round(2)
+end
+
 generate_category
 10.times { generate_book }
 sleep 3
-Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3)).save!
+Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
 sleep 3
-Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3)).save!
+Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
 4.times { generate_author }
 generate_authors_book

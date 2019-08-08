@@ -18,6 +18,7 @@ gem 'font-awesome-rails'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
+  gem 'cancan'
   gem 'ffaker'
   gem 'overcommit'
   gem 'pry-byebug'
@@ -27,6 +28,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'
   gem "rspec_junit_formatter"
   gem 'rubocop'
+  gem 'kaminari'
+  gem "factory_bot_rails"
   gem 'rubocop-rspec'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'simplecov'

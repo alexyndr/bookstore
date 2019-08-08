@@ -2,7 +2,9 @@
 
 # Home controller
 class HomeController < ApplicationController
+  attr_reader :books
   def index
-    @book = Book.all.sample
+    @books = Book.all
+    @book = books.all.sample
   end
 end

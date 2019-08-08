@@ -1,0 +1,5 @@
+$(".mb-10").append("<%= escape_javascript(render(@books)) %>");
+$(".text-center").replaceWith("<%= escape_javascript(
+    link_to_next_page @books, 'View more',
+                        :remote => true,
+                        :id     => :view_more) %>");
