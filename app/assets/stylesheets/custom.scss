@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+.show-read-more .more-text{
+  display: none;
+}
+
 .filter-link.active{ 
   color: black;
 }

@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :books, only: [:index, :show]
+  resources :books, only: %i[index show]
+
+  resources :order_quantities, only: %i[create update destroy]
 end

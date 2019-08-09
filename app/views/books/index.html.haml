@@ -31,8 +31,7 @@
             %span.badge.general-badge= category.books.count
   .mb-120
     .row
-      - @books.each do |book|
-        - @one = book
-        = render partial: 'books/book'
-    .text-center
-      = link_to_next_page @books, 'View More', remote: true, id: 'view_more', class: "btn btn-primary"
+      = render partial: 'book'
+    #div_next_link.text-center
+      = render partial: 'next_link'
+ 

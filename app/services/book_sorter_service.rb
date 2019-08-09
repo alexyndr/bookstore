@@ -12,7 +12,7 @@ class BookSorterService
     current_category
     present_category = @current_category.id
     @books = @books.by_category(present_category) if present_category.present?
-    @books = @books.order("#{params[:sort]} #{params[:direction]}").page(params[:page])
+    @books = @books.order("#{params[:sort]} #{params[:direction]}")
   end
 
   private

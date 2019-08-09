@@ -2,6 +2,8 @@ detectors:
   IrresponsibleModule:
       enabled: false
       exclude: []
+  TooManyInstanceVariables:
+      max_instance_variables: 6
   InstanceVariableAssumption:
       enabled: false
 exclude_paths:

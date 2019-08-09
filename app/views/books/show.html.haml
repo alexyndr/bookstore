@@ -21,15 +21,15 @@
         = render 'form_book'
       .general-info-wrap.divider-lg
         %p Description
-        %p.lead.small.line-height-2
-          = @book.description
-          %a.in-gold-500.ml-10{href: "#"} Read More
+        .show-more
+          %p.lead.small.line-height-2.show-read-more 
+            = @book.description
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
           %p.lead.small.pull-right 2016
       .general-info-wrap.divider-lg
-        .clearfix
+        .clearfix#show
           %p.pull-left Dimensions
           %p.lead.small.pull-right H:6.4\" x W: 0.9\" x D: 5.0
       .general-info-wrap.divider-lg
