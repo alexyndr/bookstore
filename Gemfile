@@ -34,6 +34,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'capybara'
   gem 'pagy'
+  gem 'rails-controller-testing'
+  gem 'devise'
 end
 
 group :development do

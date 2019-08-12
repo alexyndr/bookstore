@@ -9,10 +9,10 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @order_quantity = OrderQuantity.new
   end
 
   def index
-    # console
     @pagy, @books = pagy(BookSorterService.new(Book.all, params).call, items: BOOKS, link_extra: 'data-remote="true"')
   end
 

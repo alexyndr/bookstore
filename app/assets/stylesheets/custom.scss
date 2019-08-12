@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#plus,#minus { 
+  cursor: pointer; 
+}
+
 .show-read-more .more-text{
   display: none;
 }

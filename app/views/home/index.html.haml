@@ -1,16 +1,11 @@
 %main.container
   #slider.carousel.slide{'data-ride': "carousel"}
     %ol.carousel-indicators
-      %li.active{"data-slide-to" => "0", "data-target" => "#slider"}
+      %li{"data-slide-to" => "0", "data-target" => "#slider"}
       %li{"data-slide-to" => "1", "data-target" => "#slider"}
       %li{"data-slide-to" => "2", "data-target" => "#slider"}
     .carousel-inner
-      .carousel-item.active
-        = render partial: 'home/top_books'
-      .carousel-item
-        = render partial: 'home/top_books'
-      .carousel-item
-        = render partial: 'home/top_books'
+      = render partial: 'home/top_books'
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -26,5 +21,4 @@
   .mb-35
     %h3 Best Sellers
     .row
-      - 4.times do
-        = render partial: 'home/best_selers' 
+      = render partial: 'home/best_selers' 

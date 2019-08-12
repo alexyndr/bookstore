@@ -3,7 +3,18 @@
 require 'ffaker'
 
 def generate_book
-  book = Book.new(title: FFaker::Book.title, description: FFaker::Book.description(5), category_id: rand(1..3), price: price)
+  book = Book.new(
+    title: FFaker::Book.title,
+    description: FFaker::Book.description(5),
+    category_id: rand(1..3),
+    price: price,
+    cover: FFaker::Book.cover,
+    publication_year: rand(1890..2000),
+    height: 5.7,
+    materials: 'Hardcover, glossy paper',
+    depth: 4.6,
+    width: 0.9
+    )
   book.save!
 end
 
@@ -15,7 +26,7 @@ end
 def generate_category
   Category.new(id: 1, title: 'Mobile development').save!
   Category.new(id: 2, title: 'Photo').save!
-  Category.new(id: 3, title: 'Web disign').save!
+  Category.new(id: 3, title: 'Web design').save!
 end
 
 def generate_authors_book
@@ -32,10 +43,10 @@ def price
 end
 
 generate_category
-10.times { generate_book }
-sleep 3
-Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
-sleep 3
-Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
+24.times { generate_book }
+# sleep 3
+# Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
+# sleep 3
+# Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
 4.times { generate_author }
 generate_authors_book

@@ -18,7 +18,7 @@
       %h1.mt-res-0= @book.title
       %p.lead.small= @book.authors.map(&:name).join
       .row
-        = render 'form_book'
+        = render 'order_quantities/form'
       .general-info-wrap.divider-lg
         %p Description
         .show-more
@@ -27,15 +27,15 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
-          %p.lead.small.pull-right 2016
+          %p.lead.small.pull-right= @book.publication_year
       .general-info-wrap.divider-lg
         .clearfix#show
           %p.pull-left Dimensions
-          %p.lead.small.pull-right H:6.4\" x W: 0.9\" x D: 5.0
+          %p.lead.small.pull-right= "H: #{@book.height}\" x W: #{@book.width}\" x D: #{@book.depth}\""
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Materials
-          %p.lead.small.pull-right Hardcove, glossy paper
+          %p.lead.small.pull-right= @book.materials
   .mb-80
     %h3 Write a Review
     %p.general-info-text Score

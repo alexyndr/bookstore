@@ -1,5 +1,4 @@
 - @books.each do |book|
-  - @one = book
   #books
   .col-xs-6.col-sm-3
     .general-thumb-wrap
@@ -7,13 +6,12 @@
         %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
         .thumb-hover
           .general-thumb-link-wrap
-            %a.thumb-hover-link{href: "/books/#{@one.id}"}
+            %a.thumb-hover-link{href: "/books/#{book.id}"}
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
             %a.thumb-hover-link{href: "#"}
               %i.fa.fa-shopping-cart.thumb-icon
     .general-thumb-info
-      %p.title= @one.title
-      %p.font-16.in-gold-500= @one.category_id
-      %p.font-16.in-gold-500= @one.price
+      %p.title= book.title
+      %p.font-16.in-gold-500= price_euro(book.price)
       %span.divider-sm
-      %p.lead.small= @one.description.truncate_words(7)
+      %p.lead.small= book.description.truncate_words(7)
