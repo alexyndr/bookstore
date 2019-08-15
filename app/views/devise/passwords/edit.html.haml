@@ -1,0 +1,16 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title=t('set_new_pass')
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "general-form", method: :put }) do |f|
+    = devise_error_messages!
+    = f.hidden_field :reset_password_token
+    .form-group.mb-30
+      = f.label :password, t('type_new_pass'), class: "control-label input-label"
+      - if @minimum_password_length
+        (#{@minimum_password_length} #{t('char_min')})
+      = f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: t('type_new_pass'), class: "form-control"
+    .form-group.mb-40
+      = f.label :password_confirmation, t('confirm_pass'), class: "control-label input-label"
+      = f.password_field :password_confirmation, autocomplete: "off", placeholder: t('confirm_pass'), class: "form-control"
+    .text-center
+      = f.submit t('change'), class: "btn btn-default mb-20"

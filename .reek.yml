@@ -3,10 +3,12 @@ detectors:
       enabled: false
       exclude: []
   TooManyInstanceVariables:
-      max_instance_variables: 6
+      max_instance_variables: 8
   InstanceVariableAssumption:
       enabled: false
 exclude_paths:
   - app/channels/
   - config/
   - db/
+  - app/controllers/users/omniauth_callbacks_controller.rb
+  - app/models/user.rb

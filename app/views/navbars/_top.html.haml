@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
+      %a.navbar-brand=t('bookstore')
       %a.shop-link.pull-right.visible-xs{href: "#"}
         %span.shop-icon
           %span.shop-quantity 3
@@ -14,16 +14,32 @@
       %span.shop-icon
         %span.shop-quantity 3
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+      %div= "Controller name: #{controller_name}"
+      %div= "Action name: #{action_name}"
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{href: "/"} Home
+            %a{href: "/"}=t('home')
           %li.dropdown
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
             %ul.dropdown-menu
               %li
-                %a{href: "/books"} Shop
+                %a{href: "/books"}=t('shop')
               %li
-                %a{href: "#"} Log out
-          %li
-            %a{href: "#"} My account
+                %a.collapse-link{href: "/books?category_id=1"}=t('mobile')
+              %li
+                %a.collapse-link{href: "/books?category_id=2"}=t('photo')
+              %li
+                %a.collapse-link{href: "/books?category_id=3"}=t('web')
+              - if user_signed_in?
+                %li.divider{role: "separator"}
+                %li
+                  = link_to t('log_out'), destroy_user_session_path, method: :delete
+          - if !user_signed_in?
+            %li
+              %a{href: "/users/sign_in"}=t('log_in')
+            %li
+              %a{href: "/users/sign_up"}=t('sign_up')
+          - if user_signed_in?
+            %li
+              %a{href: "#"}=t('my_account')

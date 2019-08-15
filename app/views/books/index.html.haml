@@ -1,5 +1,5 @@
 %main.container
-  %h1.general-title-margin Сatalog
+  %h1.general-title-margin=t('catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
@@ -8,21 +8,21 @@
           %i.fa.fa-angle-down.dropdown-icon.pull-right
         %ul.dropdown-menu
           %li
-            = link_to 'Newest first', params: {sort: 'created_at', direction: 'desc', soring_type: 'Newest first',category_id: @current_category.id}
+            = link_to t('newest_first'), params: {sort: 'created_at', direction: 'desc', soring_type: t('newest_first'),category_id: @current_category.id}
           %li
-            = link_to 'Title: A - Z', params: {sort: 'title', direction: 'asc', soring_type: 'Title: A - Z',category_id: @current_category.id}
+            = link_to t('a_z'), params: {sort: 'title', direction: 'asc', soring_type: t('a_z'),category_id: @current_category.id}
           %li
-            = link_to 'Title: Z - A', params: {sort: 'title', direction: 'desc', soring_type: 'Title: Z - A',category_id: @current_category.id}
+            = link_to t('z_a'), params: {sort: 'title', direction: 'desc', soring_type: t('z_a'),category_id: @current_category.id}
           %li
-            = link_to 'Price: Hight to low', params: {sort: 'price', direction: 'desc', soring_type: 'Price: Hight to low',category_id: @current_category.id}
+            = link_to t('hight_to_low'), params: {sort: 'price', direction: 'desc', soring_type: t('hight_to_low'),category_id: @current_category.id}
           %li
-            = link_to 'Price: Low to Hight', params: {sort: 'price', direction: 'asc', soring_type: 'Price: Low to Hight',category_id: @current_category.id}
+            = link_to t('low_to_hight'), params: {sort: 'price', direction: 'asc', soring_type: t('low_to_hight'),category_id: @current_category.id}
           %li
-            %a{href: "#"} Popular
+            %a{href: "#"}=t('popular')
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         = link_to books_path(sort_by: params[:sort_by]), class: "filter-link #{'active' unless @current_category.id}" do
-          All
+          =t('all')
           %span.badge.general-badge= Book.count
       - @categories.each do |category|
         %li.mr-35

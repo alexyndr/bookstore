@@ -1,16 +1,11 @@
 %main.container
   #slider.carousel.slide{'data-ride': "carousel"}
     %ol.carousel-indicators
-      %li.active{"data-slide-to" => "0", "data-target" => "#slider"}
+      %li{"data-slide-to" => "0", "data-target" => "#slider"}
       %li{"data-slide-to" => "1", "data-target" => "#slider"}
       %li{"data-slide-to" => "2", "data-target" => "#slider"}
-    .carousel-inner
-      .carousel-item.active
-        = render partial: 'home/top_books'
-      .carousel-item
-        = render partial: 'home/top_books'
-      .carousel-item
-        = render partial: 'home/top_books'
+    .carousel-inner{role: "listbox"}
+      = render partial: 'home/top_books'
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -19,12 +14,11 @@
       %span.sr-only Next
 .container
   .jumbotron.text-center.mb-0
-    %h2.h1 Welcome to our amazing Bookstore!
+    %h2.h1=t('welcome')
     .mb-res-50
-      %p We pore through hundreds of new books each month and select the five best we can find to share with our members.
-    %button.btn.btn-default Get Started
+      %p=t('under_welcome')
+    %a{href: "/books", class: "button btn btn-default"}=t('get_started')
   .mb-35
-    %h3 Best Sellers
+    %h3=t('best_sellers')
     .row
-      - 4.times do
-        = render partial: 'home/best_selers' 
+      = render partial: 'home/best_selers' 

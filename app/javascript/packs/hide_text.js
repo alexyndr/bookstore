@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var maxLength = 100;
+  var maxLength = 250;
   $(".show-read-more").each(function(){
       var myStr = $(this).text();
       if($.trim(myStr).length > maxLength){
@@ -14,4 +14,5 @@ $(document).ready(function(){
       $(this).siblings(".more-text").contents().unwrap();
       $(this).remove();
   });
+
 });

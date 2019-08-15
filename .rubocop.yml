@@ -21,6 +21,9 @@ Metrics/ClassLength:
 Style/Documentation:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Max: 2
+
 AllCops:
   Exclude:
     - bin/**/*
@@ -30,3 +33,5 @@ AllCops:
     - app/channels/**/*
     - 'Gemfile'
     - 'config.ru'
+    - app/controllers/users/omniauth_callbacks_controller.rb
+    - app/models/user.rb

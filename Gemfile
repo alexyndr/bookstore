@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 gem 'rails', '~> 6.0.0.rc1'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
@@ -16,9 +18,9 @@ gem 'carrierwave', '~> 1.0'
 gem 'font-awesome-rails'
 
 gem 'bootsnap', '>= 1.4.2', require: false
+gem "letter_opener", :group => :development
 
 group :development, :test do
-  gem 'cancan'
   gem 'ffaker'
   gem 'overcommit'
   gem 'pry-byebug'
@@ -34,6 +36,12 @@ group :development, :test do
   gem 'simplecov'
   gem 'capybara'
   gem 'pagy'
+  gem 'rails-controller-testing'
+  gem 'devise'
+  gem 'omniauth-facebook'
+  # Rails Internationalization
+  gem 'rails-i18n'
+
 end
 
 group :development do

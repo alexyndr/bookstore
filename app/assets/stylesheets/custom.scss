@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#plus,#minus { 
+  cursor: pointer; 
+}
+
 .show-read-more .more-text{
   display: none;
 }
@@ -5827,7 +5831,8 @@ a.thumbnail.active {
 
 .alert {
   padding: 15px;
-  margin-bottom: 21px;
+  margin-bottom: 60px;
+  margin-top: -60px;
   border: 1px solid transparent;
   border-radius: 0px;
 }

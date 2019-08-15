@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :categories,      only: %i[index]
-  before_action :curent_category, only: %i[index]
-  before_action :sort_type, only: %i[index]
+  before_action :categories,       only: %i[index]
+  before_action :current_category, only: %i[index]
+  before_action :sort_type,        only: %i[index]
 
   BOOKS = 12
 
   def show
     @book = Book.find(params[:id])
+    @order_quantity = OrderQuantity.new
   end
 
   def index
-    # console
-    @pagy, @books = pagy(BookSorterService.new(Book.all, params).call, items: BOOKS, link_extra: 'data-remote="true"')
+    @pagy, @books = pagy(SorterBooksQuery.new(Book.all, params).call, items: BOOKS, link_extra: 'data-remote="true"')
   end
 
   private
@@ -26,7 +26,7 @@ class BooksController < ApplicationController
     @categories = Category.all
   end
 
-  def curent_category
+  def current_category
     @current_category = Category.find_by(id: params[:category_id]) || Category.new(id: nil, title: 'All')
   end
 end
