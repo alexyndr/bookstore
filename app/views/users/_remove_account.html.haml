@@ -1,0 +1,12 @@
+-# = form_for user_registration_path(@user), method: :delete do |f|
+-#   = f.button 'Please Remove My Account',  class: 'button btn-default mb-20'
+-#   .label.checkbox-label
+-#     = f.check_box 'I understand that all data will be lost', class: 'span checkbox-icon'
+.general-settings-btn
+  = button_to 'Please Remove My Account', registration_path(current_user), id: 'destroy_confirmation_button', class: 'button btn-default mb-20', method: :delete
+.form-group.checkbox.general-settings-checkbox
+  %label.checkbox-label
+    = check_box_tag 'destroy_confirmation', true, false, id: 'destroy_confirmation', class: 'checkbox-input', hidden: true
+    %span.checkbox-icon
+      %i 
+    %span.checkbox-text I understand that all data will be lost

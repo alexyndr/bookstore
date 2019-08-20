@@ -4,6 +4,12 @@
   cursor: pointer; 
 }
 
+#destroy_confirmation_button {
+  margin-bottom: 0px !important;
+  margin-top: 10px;
+  align: center;
+}
+
 .show-read-more .more-text{
   display: none;
 }
@@ -7919,6 +7925,7 @@ button.close {
 .lead {
   color: #8c8c8c;
   word-break: break-word;
+  margin-right: 21px;
 }
 
 .small {
@@ -8322,6 +8329,10 @@ button.close {
   padding-left: 0;
 }
 
+.checkbox-text{
+  text-align: center
+}
+
 .checkbox-icon {
   width: 24px;
   height: 24px;
@@ -8395,6 +8406,10 @@ button.close {
   color: #1e1e1c;
 }
 
+.btn-submit {
+  margin-top: 35px;
+}
+
 @media (min-width: 768px) {
   .navbar-nav {
     float: right;
@@ -8402,6 +8417,7 @@ button.close {
   h1,
   .h1 {
     font-size: 36px;
+    margin-right: 21px;
   }
   .table {
     table-layout: fixed;

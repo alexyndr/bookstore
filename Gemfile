@@ -41,7 +41,9 @@ group :development, :test do
   gem 'omniauth-facebook'
   # Rails Internationalization
   gem 'rails-i18n'
-
+  gem 'simple_form'
+  gem 'country_select', '~> 4.0'
+  gem 'activeadmin'
 end
 
 group :development do

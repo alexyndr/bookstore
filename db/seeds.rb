@@ -23,6 +23,43 @@ def generate_author
   author.save!
 end
 
+def generate_addresses
+  billing = BillingAddress.new(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.first_name,
+    user_id: User.last.id,
+    order_id: Order.last.id
+  )
+  shipping = ShippingAddress.new(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.first_name,
+    user_id: User.last.id,
+    order_id: Order.last.id
+  )
+  billing.save!
+  shipping.save!
+end
+
+def generate_order
+  order = Order.new(
+    number: rand(1890..2000),
+    status: ["done", "not done"].sample,
+    compleated_at: Time.now,
+    user_id: User.first.id
+    )
+  order.save!
+end
+
+def generate_user
+  user = User.new(
+    email: "alex@gmai.com",
+    password: '11111111',
+    confirmed_at: Time.now,
+    name: FFaker::Name.name
+  )
+  user.save!
+end
+
 def generate_category
   Category.new(id: 1, title: 'Mobile development').save!
   Category.new(id: 2, title: 'Photo').save!
@@ -50,3 +87,6 @@ generate_category
 # Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
 4.times { generate_author }
 generate_authors_book
+generate_user
+generate_order
+generate_addresses

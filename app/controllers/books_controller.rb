@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   before_action :current_category, only: %i[index]
   before_action :sort_type,        only: %i[index]
 
-  BOOKS = 12
+  BOOKS_PER_PAGE = 12
 
   def show
     @book = Book.find(params[:id])
@@ -13,7 +13,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @pagy, @books = pagy(SorterBooksQuery.new(Book.all, params).call, items: BOOKS, link_extra: 'data-remote="true"')
+    @pagy, @books = pagy(SorterBooksQuery.new(Book.all, params).call,
+                         items: BOOKS_PER_PAGE, link_extra: 'data-remote="true"')
   end
 
   private
