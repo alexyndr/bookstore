@@ -44,6 +44,8 @@ group :development, :test do
   gem 'simple_form'
   gem 'country_select', '~> 4.0'
   gem 'activeadmin'
+  gem 'draper'
+  gem 'ransack', '2.3.0'
 end
 
 group :development do

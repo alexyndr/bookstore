@@ -2,6 +2,8 @@
 
 # This class must doo...
 class Book < ApplicationRecord
+  # has_rich_text :description
+
   belongs_to :category
   has_many :book_authors, dependent: :destroy
   has_many :order_quantities

@@ -11,15 +11,18 @@ def generate_book
     cover: FFaker::Book.cover,
     publication_year: rand(1890..2000),
     height: 5.7,
-    materials: 'Hardcover, glossy paper',
     depth: 4.6,
-    width: 0.9
+    width: 0.9,
+    materials: 'Hardcover, glossy paper'
     )
   book.save!
 end
 
 def generate_author
-  author = Author.new(name: FFaker::Name.name)
+  author = Author.new(
+    name: FFaker::Name.name,
+    description: FFaker::Book.description(3)
+  )
   author.save!
 end
 
@@ -27,14 +30,24 @@ def generate_addresses
   billing = BillingAddress.new(
     first_name: FFaker::Name.first_name,
     last_name: FFaker::Name.first_name,
-    user_id: User.last.id,
-    order_id: Order.last.id
+    user_id: User.all.sample.id,
+    order_id: Order.all.sample.id,
+    address: FFaker::Address.street_name,
+    city: FFaker::Address.city.split.first,
+    zip: FFaker::AddressAU.postcode,
+    country: Faker::Address.country_code,
+    phone_number: '+386796'
   )
   shipping = ShippingAddress.new(
     first_name: FFaker::Name.first_name,
     last_name: FFaker::Name.first_name,
-    user_id: User.last.id,
-    order_id: Order.last.id
+    user_id: User.all.sample.id,
+    order_id: Order.all.sample.id,
+    address: FFaker::Address.street_name,
+    city: FFaker::Address.city.split.first,
+    zip: FFaker::AddressAU.postcode,
+    country: FFaker::Address.country_code,
+    phone_number: '+386796'
   )
   billing.save!
   shipping.save!
@@ -42,18 +55,18 @@ end
 
 def generate_order
   order = Order.new(
-    number: rand(1890..2000),
-    status: ["done", "not done"].sample,
+    number: rand(200..2000),
+    status: ["in_progress", "completed", "in_delivery", "delivered", "canceled"].sample,
     compleated_at: Time.now,
-    user_id: User.first.id
+    user_id: User.all.sample.id
     )
   order.save!
 end
 
 def generate_user
   user = User.new(
-    email: "alex@gmai.com",
-    password: '11111111',
+    email: FFaker::InternetSE.safe_email,
+    password: '111111',
     confirmed_at: Time.now,
     name: FFaker::Name.name
   )
@@ -80,13 +93,11 @@ def price
 end
 
 generate_category
+6.times {generate_user}
 24.times { generate_book }
-# sleep 3
-# Book.new(title: "Spider MAN!!!", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
-# sleep 3
-# Book.new(title: "War and Peace", description: FFaker::Book.description(5), category_id: rand(1..3), price: price).save!
-4.times { generate_author }
+5.times { generate_author }
 generate_authors_book
-generate_user
-generate_order
+12.times {generate_order}
 generate_addresses
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
