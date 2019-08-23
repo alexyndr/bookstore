@@ -46,6 +46,8 @@ group :development, :test do
   gem 'activeadmin'
   gem 'draper'
   gem 'ransack', '2.3.0'
+  gem 'activeadmin_addons'
+  gem 'aasm'
 end
 
 group :development do

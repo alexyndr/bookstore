@@ -1,11 +1,23 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Order do
-  permit_params :status
+  permit_params :status, :active_admin_requested_event
+
+  after_save do |order|
+    event = params[:order][:active_admin_requested_event]
+    unless event.blank?
+      # whitelist to ensure we don't run an arbitrary method
+      safe_event = (order.aasm.events(permitted: true).map(&:name) & [event.to_sym]).first
+      raise "Forbidden event #{event} requested on instance #{order.id}" unless safe_event
+
+      # launch the event with bang
+      order.send("#{safe_event}!")
+    end
+  end
 
   config.filters = false
 
-  scope :all
+  scope :all, default: true
   scope :in_progress
   scope :completed
   scope :in_delivery
@@ -15,7 +27,7 @@ ActiveAdmin.register Order do
   index do
     selectable_column
     column :number
-    column :status
+    state_column :status
     column :user_id
     column :created_at
     actions defaults: false do |status|
@@ -26,20 +38,14 @@ ActiveAdmin.register Order do
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :status, as: :select, collection: Order.statuses.values.map(&:to_s)
+      f.input :status, input_html: { disabled: true }, as: :string, label: 'Current state'
+
+      # use the attr_accessor to pass the data
+      # if ( :status == 'canceled' || 'delivered')
+      # f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection: f.object.aasm.events(permitted: true).map(&:name)
+      # use the attr_accessor to pass the data
+      f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection: f.object.aasm.events(permitted: true).map(&:name)
     end
     f.actions
   end
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 end

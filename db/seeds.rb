@@ -4,7 +4,7 @@ require 'ffaker'
 
 def generate_book
   book = Book.new(
-    title: FFaker::Book.title,
+    title: FFaker::Book.title + FFaker::Name.first_name,
     description: FFaker::Book.description(5),
     category_id: rand(1..3),
     price: price,
@@ -35,8 +35,8 @@ def generate_addresses
     address: FFaker::Address.street_name,
     city: FFaker::Address.city.split.first,
     zip: FFaker::AddressAU.postcode,
-    country: Faker::Address.country_code,
-    phone_number: '+386796'
+    country: FFaker::Address.country_code,
+    phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
   )
   shipping = ShippingAddress.new(
     first_name: FFaker::Name.first_name,
@@ -47,7 +47,7 @@ def generate_addresses
     city: FFaker::Address.city.split.first,
     zip: FFaker::AddressAU.postcode,
     country: FFaker::Address.country_code,
-    phone_number: '+386796'
+    phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
   )
   billing.save!
   shipping.save!
@@ -56,7 +56,6 @@ end
 def generate_order
   order = Order.new(
     number: rand(200..2000),
-    status: ["in_progress", "completed", "in_delivery", "delivered", "canceled"].sample,
     compleated_at: Time.now,
     user_id: User.all.sample.id
     )

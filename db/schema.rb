@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_074550) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "number"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "compleated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

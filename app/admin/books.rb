@@ -8,10 +8,20 @@ ActiveAdmin.register Book do
 
   config.filters = false
 
+  # show do
+  #   attributes_table do
+  #     image_row :cover
+  #   end
+  # end
+
   index do
     selectable_column
 
-    column :cover
+    column :cover do |img|
+      image_tag img
+    end
+
+    # image_column :cover, style: :thumb
 
     column :title
 
