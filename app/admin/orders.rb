@@ -41,10 +41,8 @@ ActiveAdmin.register Order do
       f.input :status, input_html: { disabled: true }, as: :string, label: 'Current state'
 
       # use the attr_accessor to pass the data
-      # if ( :status == 'canceled' || 'delivered')
-      # f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection: f.object.aasm.events(permitted: true).map(&:name)
-      # use the attr_accessor to pass the data
-      f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection: f.object.aasm.events(permitted: true).map(&:name)
+      f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection:
+      f.object.aasm.events(reject: %i[in_progress completed in_delivery]).map(&:name)
     end
     f.actions
   end

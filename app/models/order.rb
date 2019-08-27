@@ -35,7 +35,7 @@ class Order < ApplicationRecord
     end
 
     event :canceled do
-      transitions from: %i[in_progress complete in_delivery delivered], to: :canceled
+      transitions from: %i[in_progress completed in_delivery delivered], to: :canceled
     end
   end
 end
