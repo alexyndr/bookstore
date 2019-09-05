@@ -28,7 +28,7 @@ ActiveAdmin.register Order do
     selectable_column
     column :number
     state_column :status
-    column :user_id
+    column :user
     column :created_at
     actions defaults: false do |status|
       link_to 'Change status', edit_admin_order_path(status)
@@ -42,7 +42,7 @@ ActiveAdmin.register Order do
 
       # use the attr_accessor to pass the data
       f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection:
-      f.object.aasm.events(reject: %i[in_progress completed in_delivery]).map(&:name)
+        f.object.aasm.events(reject: %i[in_progress completed in_delivery]).map(&:name)
     end
     f.actions
   end

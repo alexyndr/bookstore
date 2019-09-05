@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Books page', type: :feature do
-  let!(:book) { create(:book, category_id: category.id) }
+  let!(:book) { create(:book, :attach_covers, category_id: category.id) }
   let(:category) { create(:category) }
   let(:author) { create(:author) }
   let(:user_book) { BookAuthor.create author_id: author.id, book_id: book.id }

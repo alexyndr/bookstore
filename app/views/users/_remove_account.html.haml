@@ -3,7 +3,7 @@
 -#   .label.checkbox-label
 -#     = f.check_box 'I understand that all data will be lost', class: 'span checkbox-icon'
 .general-settings-btn
-  = button_to 'Please Remove My Account', registration_path(current_user), id: 'destroy_confirmation_button', class: 'button btn-default mb-20', method: :delete
+  = button_to 'Please Remove My Account', registration_path(current_user), id: 'destroy_confirmation_button', disabled: true, class: 'button btn-default mb-20', method: :delete
 .form-group.checkbox.general-settings-checkbox
   %label.checkbox-label
     = check_box_tag 'destroy_confirmation', true, false, id: 'destroy_confirmation', class: 'checkbox-input', hidden: true

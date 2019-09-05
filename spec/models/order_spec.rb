@@ -11,7 +11,7 @@ RSpec.describe Order, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:user).without_validating_presence }
-    it { is_expected.to have_many(:addresses).dependent(:destroy) }
+    it { is_expected.to have_many(:addresses) }
   end
 
   describe 'status enum value' do
@@ -20,5 +20,12 @@ RSpec.describe Order, type: :model do
     it { expect(described_class.statuses[:in_delivery]).to eq(2) }
     it { expect(described_class.statuses[:delivered]).to eq(3) }
     it { expect(described_class.statuses[:canceled]).to eq(4) }
+  end
+
+  describe 'aasm' do
+    it { is_expected.to transition_from(:in_progress).to(:completed).on_event(:completed, :canceled) }
+    it { is_expected.to transition_from(:completed).to(:in_delivery).on_event(:in_delivery, :canceled) }
+    it { is_expected.to transition_from(:in_delivery).to(:delivered).on_event(:delivered, :canceled) }
+    it { is_expected.to transition_from(:delivered).to(:canceled).on_event(:canceled) }
   end
 end

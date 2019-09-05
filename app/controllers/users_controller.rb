@@ -23,7 +23,6 @@ class UsersController < ApplicationController
       flash[:success] = 'Email changed'
     else
       flash[:warning] = @user.errors.full_messages.to_sentence
-      render :edit
     end
     redirect_to settings_path
   end

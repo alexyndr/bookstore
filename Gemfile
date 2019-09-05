@@ -48,6 +48,11 @@ group :development, :test do
   gem 'ransack', '2.3.0'
   gem 'activeadmin_addons'
   gem 'aasm'
+  gem "aws-sdk-s3", require: false
+  gem 'image_processing', '~> 1.2'
+  # gem "mini_magick"
+  gem 'active_storage_validations'
+  gem 'selenium-webdriver'
 end
 
 group :development do

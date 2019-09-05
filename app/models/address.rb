@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Address < ApplicationRecord
-  belongs_to :user, optional: true
-  belongs_to :order, optional: true
+  # belongs_to :user, optional: true
+  # belongs_to :order, optional: true
+  belongs_to :addressable, polymorphic: true # , optional: true
 
   validates :first_name, :last_name,
             presence: true,
@@ -29,6 +30,7 @@ class Address < ApplicationRecord
                       message: 'Consist of + 0-9 only no special symbols' },
             length: { maximum: 15 }
 
-  scope :billing_address, -> { where(type: 'BillingAddress') }
-  scope :shipping_address, -> { where(type: 'ShippingAddress') }
+  # scope :billing_address, -> { where(type: 'BillingAddress') }
+  # scope :shipping_address, -> { where(type: 'ShippingAddress') }
+  enum addresses_type: { billing: 0, shipping: 1 }
 end

@@ -9,6 +9,8 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it { is_expected.to respond_with 200 }
+
+    it { is_expected.to render_template :index }
   end
 
   describe 'POST #show' do

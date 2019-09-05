@@ -1,0 +1,19 @@
+.general-message-wrap.divider-lg
+  .clearfix
+    - if review.user.image
+      = image_tag review.user.image, class: "img-circle logo-size inlide-block pull-left"
+    - else
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+        = review.user.email.first.capitalize
+      .ml-70
+        %div
+          .general-message-date.hidden-xs= review.created_at.strftime("%B %d, %Y")
+          .max-240
+            .general-message-verified=t('verified')
+            .general-message-name= review.user.name
+        .mb-15
+          - review.score.times do
+            %i.fa.fa-star.rate-star
+          - (5 - review.score).times do
+            %i.fa.fa-star.rate-empty
+        %p= review.text

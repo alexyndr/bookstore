@@ -21,4 +21,6 @@
   &.in_delivery { background: rgb(228, 255, 73); }
   &.delivered { background: rgb(9, 158, 21); }
   &.canceled { background: red; }
+  &.approved { background: rgb(9, 158, 21); }
+  &.rejected { background: red; }
 }

@@ -1,0 +1,9 @@
+.mb-15
+  = simple_form_for [@book, @book.reviews.build], html: {class: 'col-md-8 mb-40'} do |f|
+    = f.label :score
+    = f.collection_radio_buttons(:score, (1..5), :to_s, :to_s)  do |star|
+      = star.radio_button(class: 'star-button') + star.label
+    = f.hidden_field :user_id, value: current_user.id
+    = f.input :title, placeholder: t('title')
+    = f.input :text, placeholder: t('review')
+    = f.button :submit, t('post'), class: "btn mb-20"

@@ -3,22 +3,18 @@
 ActiveAdmin.register Book do
   decorate_with BookDecorator
 
-  permit_params :title, :price, :category_id, :cover, :description, :materials, :depth,
-                :height, :width, :publication_year, author_ids: []
+  permit_params :title, :price, :category_id, :description, :materials, :depth,
+                :height, :width, :publication_year, author_ids: [], covers: []
 
   config.filters = false
-
-  # show do
-  #   attributes_table do
-  #     image_row :cover
-  #   end
-  # end
 
   index do
     selectable_column
 
-    column :cover do |img|
-      image_tag img
+    column :covers do |book|
+      book.covers.map do |cover|
+        image_tag url_for(cover.variant(resize: '50x50').processed)
+      end
     end
 
     # image_column :cover, style: :thumb
@@ -40,7 +36,7 @@ ActiveAdmin.register Book do
     f.semantic_errors
     f.inputs do
       f.input :title
-      f.input :cover
+      f.input :covers, as: :file, input_html: { multiple: true }
       f.input :description, as: :text
       f.input :price
       f.input :publication_year
@@ -52,6 +48,38 @@ ActiveAdmin.register Book do
       f.input :authors, as: :check_boxes, collection: Author.all.map { |author| [author.name, author.id] }
     end
     f.actions
+  end
+
+  show do
+    attributes_table do
+      row :title
+      row :description
+      row :covers do |book|
+        book.covers.map do |cover|
+          image_tag url_for(cover)
+        end
+      end
+      row :price
+      row :publication_year
+      row :materials
+      row :height
+      row :width
+      row :depth
+      row :category
+      row :authors
+      row :created_at
+      row :updated_at
+    end
+    if book.reviews.approved.present?
+      panel 'Reviews' do
+        table_for book.reviews.approved do
+          column :title
+          column :user
+          column :created_at
+        end
+      end
+    end
+    active_admin_comments
   end
 
   # See permitted parameters documentation:

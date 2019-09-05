@@ -4,7 +4,8 @@ class Order < ApplicationRecord
   attr_accessor :active_admin_requested_event
   include AASM
 
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, as: :addressable
+  # has_many :addresses, dependent: :destroy
   belongs_to :user, optional: true
 
   enum status: {

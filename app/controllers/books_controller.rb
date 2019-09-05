@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @order_quantity = OrderQuantity.new
+    @reviews = @book.reviews
   end
 
   def index
