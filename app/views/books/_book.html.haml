@@ -7,9 +7,11 @@
         -# %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
         .thumb-hover
           .general-thumb-link-wrap
-            %a.thumb-hover-link{href: "/books/#{book.id}"}
+            = link_to book_path(id: book), class: 'thumb-hover-link' do
+              -# %a.thumb-hover-link{href: "/books/#{book.id}"}
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            %a.thumb-hover-link{href: "#"}
+            = link_to order_items_path(order_item: { book_id: book.id, quantity: 1 }), method: :post, class: "thumb-hover-link" do
+              -# %a.thumb-hover-link{href: "#"}
               %i.fa.fa-shopping-cart.thumb-icon
     .general-thumb-info
       %p.title= book.title

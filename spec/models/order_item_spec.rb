@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe OrderQuantity, type: :model do
+RSpec.describe OrderItem, type: :model do
   context 'with db columns' do
     it { is_expected.to have_db_column(:quantity).of_type(:integer) }
   end

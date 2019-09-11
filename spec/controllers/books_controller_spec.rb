@@ -19,7 +19,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it '@order_quantity instance off OrderQuantity' do
-      expect(assigns(:order_quantity)).to be_an_instance_of(OrderQuantity)
+      expect(assigns(:order_item)).to be_an_instance_of(OrderItem)
     end
   end
 

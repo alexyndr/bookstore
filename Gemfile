@@ -36,6 +36,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'capybara'
   gem 'pagy'
+  gem "nokogiri", ">= 1.10.4"
   gem 'rails-controller-testing'
   gem 'devise'
   gem 'omniauth-facebook'

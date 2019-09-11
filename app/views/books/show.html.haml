@@ -18,7 +18,7 @@
       %h1.mt-res-0= @book.title
       %p.lead.small= @book.authors.map(&:name).join
       .row
-        = render 'order_quantities/form'
+        = render 'order_items/form'
       .general-info-wrap.divider-lg
         %p=t('description')
         .show-more

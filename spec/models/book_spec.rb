@@ -22,7 +22,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many(:book_authors).dependent(:destroy) }
     it { is_expected.to have_many(:authors).through(:book_authors) }
     it { is_expected.to have_many(:reviews).dependent(:destroy) }
-    it { is_expected.to have_many(:order_quantities) }
+    it { is_expected.to have_many(:order_items) }
     it { is_expected.to belong_to(:category) }
   end
 

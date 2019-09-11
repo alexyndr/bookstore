@@ -53,7 +53,7 @@ end
 #     country: FFaker::Address.country_code,
 #     phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
 #   )
-#   shipping = ShippingAddress.new(
+#   shipping = Address.shipping.new(
 #     first_name: FFaker::Name.first_name,
 #     last_name: FFaker::Name.first_name,
 #     user_id: User.all.sample.id,
@@ -114,5 +114,7 @@ generate_authors_book
 12.times {generate_order}
 # generate_addresses
 4.times {generate_review}
+
+4.times { Coupon.create(code: FFaker::AddressAU.postcode) }
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
