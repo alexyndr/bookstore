@@ -54,6 +54,7 @@ group :development, :test do
   # gem "mini_magick"
   gem 'active_storage_validations'
   gem 'selenium-webdriver'
+  gem 'wicked'
 end
 
 group :development do

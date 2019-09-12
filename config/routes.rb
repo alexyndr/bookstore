@@ -10,15 +10,17 @@ Rails.application.routes.draw do
 
   get  'settings', to: 'users#edit'
 
+  get   'settings/addresses', to: 'addresses#edit'
+  post  'settings/addresses', to: 'addresses#create'
+  patch 'settings/addresses', to: 'addresses#update'
   # get  'cart', to: 'cart#index'
+
+  resources :checkout
+  resources :order_items, only: %i[create update destroy]
 
   resource :cart, only: %i[show update]
 
   # resources :addresses, only: %i[edit create update]
-
-  get   'settings/addresses', to: 'addresses#edit'
-  post  'settings/addresses', to: 'addresses#create'
-  patch 'settings/addresses', to: 'addresses#update'
 
   # patch 'cart', to: 'cart#update'
 
@@ -35,6 +37,4 @@ Rails.application.routes.draw do
   resources :books, only: %i[index show] do
     resources :reviews, only: :create
   end
-
-  resources :order_items, only: %i[create update destroy]
 end

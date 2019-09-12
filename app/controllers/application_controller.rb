@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
   #   Order.find_or_initialize_by(id: session[:order_id])
   # end
 
-  # def current_ability
-  #   @current_ability ||= Ability.new(current_user, session)
-  # end
+  def current_ability
+    @current_ability ||= Ability.new(current_user, session)
+  end
 
   def subtotal_price
     total_sum = current_order.order_items.map { |item| item.quantity * item.book.price }

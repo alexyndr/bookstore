@@ -1,0 +1,12 @@
+= simple_form_for @address_shipping, as: :address, url: settings_addresses_path, method: :patch do |f|
+  = f.hidden_field :address_type, value: @address_shipping.address_type
+  -# = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }
+  -# = f.input :order_id, label: false, input_html: { value: 1, type: 'hidden' }
+  = f.input :first_name, placeholder: "First name"
+  = f.input :last_name, placeholder: "Last name"
+  = f.input :address, placeholder: "Address"
+  = f.input :city, placeholder: "City"
+  = f.input :zip, placeholder: "Zip"
+  = f.input :country, prompt: "Select country"
+  = f.input :phone_number, placeholder: "Example +355 66 123 4567"
+  = f.submit "Save", class: 'btn-submit btn primary'

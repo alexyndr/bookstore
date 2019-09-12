@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AddressesController < ApplicationController
+  authorize_resource
+
   before_action :authenticate_user!
   attr_reader :address
 

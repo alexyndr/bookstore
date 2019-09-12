@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OrderItemsController < ApplicationController
+  authorize_resource
+
   def create
     @order_item = current_order.order_items.find_or_create_by(book_id: order_params[:book_id])
     @order_item.update(quantity: @order_item.quantity.to_i + order_params[:quantity].to_i)

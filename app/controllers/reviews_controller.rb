@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
+  authorize_resource
   def create
     @review = book.reviews.build(review_params.merge(user_id: current_user.id))
 

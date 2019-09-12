@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  authorize_resource
+
   before_action :categories,       only: %i[index]
   before_action :current_category, only: %i[index]
   before_action :sort_type,        only: %i[index]
