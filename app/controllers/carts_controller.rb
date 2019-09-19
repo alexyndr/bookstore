@@ -3,27 +3,49 @@
 class CartsController < ApplicationController
   def show
     @order_items = current_order.order_items
-    # @price = @orders.item.book.price * @orders.item.queries
+    @sum_with_discount = sum_of_discount(coupon_show).round(2)
+    @discount = subtotal_price - @sum_with_discount
   end
 
   def update
     @order_items = current_order.order_items
-    @final_sum = discount_to_percent.round(2)
-    @discount = subtotal_price - @final_sum
+    @sum_with_discount = sum_of_discount(coupon_update).round(2)
+    @discount = subtotal_price - @sum_with_discount
     render :show
   end
 
   private
 
-  def coupon_discount
-    Coupon.find_by(active: true, code: params[:code])
+  def coupon_show
+    coupon = current_order.coupon # if current_order.coupon.present?
+    if !coupon
+      nil
+    elsif coupon.order == current_order
+      coupon
+    end
   end
 
-  def discount_checker
-    coupon_discount ? coupon_discount.discount.to_f : 0
+  def coupon_update
+    coupon = Coupon.find_by(code: params[:code])
+    if !coupon && current_order.coupon
+      coupon = current_order.coupon
+      coupon.update(order: nil)
+      nil
+    elsif !coupon && !current_order.coupon
+      nil
+    elsif coupon.active == true
+      coupon.update(order: current_order)
+      coupon
+    elsif coupon.order == current_order && coupon.active == false
+      coupon
+    end
   end
 
-  def discount_to_percent
-    ((100 - discount_checker) / 100) * subtotal_price
+  def discount_checker(coupon_action)
+    coupon_action ? coupon_action.discount.to_f : 0
+  end
+
+  def sum_of_discount(coupon_action)
+    ((100 - discount_checker(coupon_action)) / 100) * subtotal_price
   end
 end

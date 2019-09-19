@@ -4,13 +4,17 @@ class Order < ApplicationRecord
   attr_accessor :active_admin_requested_event
   include AASM
 
-  has_many :addresses, as: :addressable, dependent: :destroy
+  belongs_to :shipping_address, class_name: "Address", optional: true, autosave: true
+  belongs_to :billing_address, class_name: "Address", optional: true, autosave: true
+  # has_many :addresses, as: :addressable, dependent: :destroy
   # has_many :addresses, dependent: :destroy
   belongs_to :user, optional: true
 
   has_one :coupon, dependent: :destroy
   # has_many :books, through: :order_quantities
   has_many :order_items, dependent: :destroy
+
+  # scope :in_progress, -> { find_by(status: :in_progress) }
 
   enum status: {
     in_progress: 0,
@@ -39,7 +43,7 @@ class Order < ApplicationRecord
       transitions from: :in_delivery, to: :delivered
     end
 
-    event :canceled do
+    event :canccanceledeled do
       transitions from: %i[in_progress completed in_delivery delivered], to: :canceled
     end
   end
