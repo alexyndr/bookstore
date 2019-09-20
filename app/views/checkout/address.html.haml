@@ -1,25 +1,5 @@
 %main.container
-  %h1.general-title-margin Checkout
-  %ul.steps.list-inline
-    %li.step.active
-      %span.step-number 1
-      %span.step-text.hidden-xs Address
-    %li.step-divider
-    %li.step
-      %span.step-number 2
-      %span.step-text.hidden-xs Delivery
-    %li.step-divider
-    %li.step
-      %span.step-number 3
-      %span.step-text.hidden-xs Payment
-    %li.step-divider
-    %li.step
-      %span.step-number 4
-      %span.step-text.hidden-xs Confirm
-    %li.step-divider
-    %li.step
-      %span.step-number 5
-      %span.step-text.hidden-xs Complete
+  = render partial: "checkout/partials/header"
   %form.res-mb-100
     .hidden-xs.hidden-sm
       .row
@@ -51,10 +31,11 @@
           %td
             %p.font-16 Item Total:
           %td
-            %p.font-16= price_euro(@final_sum ||= subtotal_price)
+            %p.font-16= price_euro(item_total_price)
         %tr
           %td
             %p.font-16 Order Total:
           %td
-            %p.font-16= price_euro(@final_sum ||= subtotal_price)
-      = f.button :submit, "Save and Continue", class: 'btn center-block mb-20'
+            %p.font-16= price_euro(item_total_price)
+      .text-center
+        = f.button :submit, "Save and Continue", class: 'btn btn-default mb-20'

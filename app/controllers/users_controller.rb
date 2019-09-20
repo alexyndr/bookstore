@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def update_password
     if @user.update_with_password(user_params_password)
-      # bypass_sign_in(@user)
       redirect_to root_path
       flash[:success] = 'Password changed'
     else
@@ -20,23 +19,12 @@ class UsersController < ApplicationController
   def update_email
     @user.skip_reconfirmation!
     if @user.update_without_password(user_params_email)
-      # bypass_sign_in(@user)
       flash[:success] = 'Email changed'
     else
       flash[:warning] = @user.errors.full_messages.to_sentence
     end
     redirect_to settings_path
   end
-
-  # def update_email
-  #   @user.skip_reconfirmation!
-  #   if @user.update(user_params_email)
-  #     flash[:success] = 'Email changed'
-  #   else
-  #     flash[:warning] = @user.errors.full_messages.to_sentence
-  #   end
-  #   redirect_to settings_path
-  # end
 
   private
 

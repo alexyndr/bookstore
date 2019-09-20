@@ -9,8 +9,10 @@ class Order < ApplicationRecord
   # has_many :addresses, as: :addressable, dependent: :destroy
   # has_many :addresses, dependent: :destroy
   belongs_to :user, optional: true
+  belongs_to :delivery, optional: true
 
   has_one :coupon, dependent: :destroy
+  has_one :card, dependent: :destroy
   # has_many :books, through: :order_quantities
   has_many :order_items, dependent: :destroy
 

@@ -30,14 +30,6 @@ class AddressesController < ApplicationController
     current_user.send(type) || current_user.send("build_#{type}")
   end
 
-  # def address_shipping
-  #   current_user.shipping_address || current_user.build_shipping_address
-  # end
-
-  # def address_billing
-  #   current_user.billing_address || current_user.build_billing_address
-  # end
-
   def safe_params
     params.require(:address).permit(:first_name, :last_name, :address,
                                     :country, :city, :zip, :phone_number)

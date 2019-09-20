@@ -4,7 +4,7 @@ class Checkout::CompleteService
   end
 
   def call(step)
-    case step 
+    case step
     when :address then address
     when :delivery then delivery
     when :payment then payment

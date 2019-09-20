@@ -32,17 +32,17 @@
                   %td
                     %p.font-16 Subtotal:
                   %td
-                    %p.font-16= price_euro(subtotal_price)
+                    %p.font-16= price_euro(subtotal_price_sum)
                 %tr
                   %td
                     %p.font-16 Coupon:
                   %td
-                    %p.font-16= price_euro(@discount ||= 0.0)
+                    %p.font-16= price_euro(@discount)
                 %tr
                   %td
                     %strong.font-18 Order Total:
                   %td
-                    %strong.font-18= price_euro(@sum_with_discount ||= subtotal_price)
+                    %strong.font-18= price_euro(item_total_price)
       .text-center
         = link_to "Checkout", checkout_path(:login), class: "btn btn-default mb-20 hidden-xs"
   - else

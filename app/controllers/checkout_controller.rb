@@ -33,19 +33,6 @@ class CheckoutController < ApplicationController
   end
 
   def update_manager
-    Checkout::UpdateManagerService.new(current_order, params).call(step)
+    Checkout::UpdateManagerService.new(current_order, params, session).call(step)
   end
-
-  # def update_address
-  #   @address_billing = billing_address
-  #   @address_shipping = shipping_address
-  # end
-
-  # def billing_address
-  #   current_order.billing_address ||= current_order.user.try(:billing_address) || Address.new
-  # end
-
-  # def shipping_address
-  #   current_order.shipping_address ||= current_order.user.try(:shipping_address) || Address.new
-  # end
 end

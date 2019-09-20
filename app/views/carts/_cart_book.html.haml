@@ -3,7 +3,6 @@
     .general-img-wrap-table
       = link_to order_item.book do
         = image_tag order_item.book.covers.first.variant(resize: "180x180").processed, class: "cart-img-shadow pull-left"
-      -# %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
   %td
     = link_to order_item.book do
       %p.title= order_item.book.title
@@ -15,7 +14,6 @@
         = link_to order_item_path(order_item, order_item: {quantity: -1}), class: 'input-link', method: :put do
           %i.fa.fa-minus.line-heaght-40
         = form.text_field :quantity, value: order_item.quantity, class: 'form-control quantity-input'
-        -# %input.form-control.quantity-input{type: "text", placeholder: order_item.quantity }
         = link_to order_item_path(order_item, order_item: {quantity: 1}), class: 'input-link', method: :put do
           %i.fa.a.fa-plus.line-heaght-40
   %td

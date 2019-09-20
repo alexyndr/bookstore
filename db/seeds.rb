@@ -2,6 +2,8 @@
 
 require 'ffaker'
 require 'open-uri'
+# require 'factory_bot'
+# require 'spec/factories'
 
 def generate_book
   book = Book.new(
@@ -41,32 +43,20 @@ def generate_review
   review.save!
 end
 
-# def generate_addresses
-#   billing = BillingAddress.new(
-#     first_name: FFaker::Name.first_name,
-#     last_name: FFaker::Name.first_name,
-#     user_id: User.all.sample.id,
-#     order_id: Order.all.sample.id,
-#     address: FFaker::Address.street_name,
-#     city: FFaker::Address.city.split.first,
-#     zip: FFaker::AddressAU.postcode,
-#     country: FFaker::Address.country_code,
-#     phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
-#   )
-#   shipping = Address.shipping.new(
-#     first_name: FFaker::Name.first_name,
-#     last_name: FFaker::Name.first_name,
-#     user_id: User.all.sample.id,
-#     order_id: Order.all.sample.id,
-#     address: FFaker::Address.street_name,
-#     city: FFaker::Address.city.split.first,
-#     zip: FFaker::AddressAU.postcode,
-#     country: FFaker::Address.country_code,
-#     phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
-#   )
-#   billing.save!
-#   shipping.save!
-# end
+def generate_address
+  address = Address.new(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.first_name,
+    user_id: User.all.sample.id,
+    order_id: Order.all.sample.id,
+    address: FFaker::Address.street_name,
+    city: FFaker::Address.city.split.first,
+    zip: FFaker::AddressAU.postcode,
+    country: FFaker::Address.country_code,
+    phone_number: '+380' + FFaker::PhoneNumberDA.phone_number
+  )
+  address.save!
+end
 
 def generate_order
   order = Order.new(
@@ -85,6 +75,15 @@ def generate_user
     name: FFaker::Name.name
   )
   user.save!
+end
+
+def generate_delivery
+  delivery = Delivery.new(
+    name: "Delivery #{FFaker::Book.unique.title}",
+    shipping_time: "#{[1,2,3,4,5,6].sample} days",
+    price: [22,32,14,25].sample
+  )
+  delivery.save!
 end
 
 def generate_category
@@ -110,9 +109,9 @@ generate_category
 8.times {generate_user}
 17.times { generate_book }
 5.times { generate_author }
+4.times { generate_delivery }
 generate_authors_book
 12.times {generate_order}
-# generate_addresses
 4.times {generate_review}
 
 4.times { Coupon.create(code: FFaker::AddressAU.postcode) }

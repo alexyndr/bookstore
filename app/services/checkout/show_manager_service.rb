@@ -1,5 +1,5 @@
 class Checkout::ShowManagerService
-  attr_reader :address_billing, :address_shipping
+  attr_reader :address_billing, :address_shipping, :deliveries, :current_delivery, :order, :card
 
   def initialize(order)
     @order = order
@@ -18,10 +18,28 @@ class Checkout::ShowManagerService
   def address
     @address_billing = set_billing_address
     @address_shipping = set_shipping_address
-    @order&.coupon&.update(active: false) # if @order.coupon
+    @order.coupon&.update(active: false)
   end
 
   def delivery
+    @deliveries = Delivery.all
+  end
+
+  def payment
+    @card = set_credit_card
+  end
+
+  def confirm
+    @address_billing = @order.billing_address
+    @address_shipping = @order.shipping_address
+    @current_delivery = @order.delivery
+    @card = @order.card
+  end
+
+  private
+
+  def set_credit_card
+    @card ||= @order.card || Card.new
   end
 
   def set_billing_address
