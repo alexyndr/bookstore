@@ -30,6 +30,6 @@ class Checkout::CompleteService
   end
 
   def complete
-    @order.completed
+    @order.completed?
   end
 end

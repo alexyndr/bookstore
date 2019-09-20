@@ -36,6 +36,10 @@ class Checkout::ShowManagerService
     @card = @order.card
   end
 
+  def complete
+    @order
+  end
+
   private
 
   def set_credit_card
