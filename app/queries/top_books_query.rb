@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 class TopBooksQuery
-  def initialize
-    @orders = Order.where.not(status: :in_progress).where.not(status: :canceled)
-  end
-
   def self.call
     new.call
   end
 
   def call
-    ids = orders.joins(:order_items).group(:book_id).order('sum("order_items"."quantity") DESC').count.keys.first(4)
-    Book.where(id: ids)
+    Book.joins(order_items: :order).where('(status <> 0) AND (status <> 4)')
+    .select('books.*, sum(order_items.quantity) AS top').group(:id).order('top DESC')
   end
 
   private

@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
       order.order_items << session_order.order_items
       # session[:current_order_id] = order.id
       # session_order.delete
-      # session_order_id
       return order
     end
     session_order
@@ -43,11 +42,6 @@ class ApplicationController < ActionController::Base
 
     order = Order.create
     session[:current_order_id] = order.id
-    # session_order_id
     order
   end
-
-  # def session_order_id
-  #   session[:current_order_id] = order.id
-  # end
 end
