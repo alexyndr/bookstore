@@ -2,6 +2,8 @@
 
 class CartsController < ApplicationController
   def show
+    return if current_order.nil?
+
     @order_items = current_order.order_items
     @discount = subtotal_price_sum - item_total_price
   end

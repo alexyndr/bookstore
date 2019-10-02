@@ -31,8 +31,8 @@ class Checkout::UpdateManagerService
   end
 
   def confirm
-    @order.complete!
-    @session.delete(:order_id)
+    @order.update(compleated_at: Time.now)
+    @session.delete(:current_order_id)
   end
 
   private

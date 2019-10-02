@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class Checkout::ShowManagerService
   attr_reader :address_billing, :address_shipping, :deliveries, :current_delivery, :order, :card
 
-  def initialize(order)
+  def initialize(order, user)
     @order = order
+    @user = user
   end
 
   def call(step)

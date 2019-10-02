@@ -21,4 +21,4 @@
   .mb-35
     %h3=t('best_sellers')
     .row
-      = render partial: 'home/best_selers' 
+      = render partial: 'home/best_selers', collection: @top_books, as: :book

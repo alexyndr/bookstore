@@ -1,6 +1,7 @@
 class Checkout::CompleteService
-  def initialize(order)
+  def initialize(order, user)
     @order = order
+    @user = user
   end
 
   def call(step)
@@ -30,6 +31,6 @@ class Checkout::CompleteService
   end
 
   def complete
-    @order.completed?
+    @order.compleated_at?
   end
 end

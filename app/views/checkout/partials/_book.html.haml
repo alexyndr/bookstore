@@ -1,0 +1,13 @@
+%tr
+  %td
+    .general-img-wrap-table
+      = image_tag order_item.book.covers.first.variant(resize: "180x180").processed, class: "cart-img-shadow pull-left"
+  %td
+    %p.title= order_item.book.title
+    %p.in-grey-600.fw-300= order_item.book.description[0..60] + "..."
+  %td
+    %span.font-16.in-gold-500= price_euro(order_item.book.price)
+  %td
+    %span.ml-30= order_item.quantity
+  %td
+    %span.font-16.in-gold-500= price_euro(order_item.quantity * order_item.book.price)

@@ -6,7 +6,13 @@ class CheckoutController < ApplicationController
   def show
     show_manager
 
-    render_wizard
+    if current_order.order_items.empty? && step != :complete
+      redirect_to root_path
+    else
+      render_wizard
+    end
+
+    current_order.completed! if step == :complete && current_order.compleated_at?
   end
 
   def update
@@ -24,12 +30,12 @@ class CheckoutController < ApplicationController
       return jump_to(previous_step) unless complete_step?
     end
 
-    @checkout = Checkout::ShowManagerService.new(current_order)
+    @checkout = Checkout::ShowManagerService.new(current_order, current_user)
     @checkout.call(step)
   end
 
   def complete_step?
-    Checkout::CompleteService.new(current_order).call(step)
+    Checkout::CompleteService.new(current_order, current_user).call(step)
   end
 
   def update_manager

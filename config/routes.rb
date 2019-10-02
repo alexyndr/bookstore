@@ -9,23 +9,16 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   get  'settings', to: 'users#edit'
+  get  'orders', to: 'orders#index'
 
   get   'settings/addresses', to: 'addresses#edit'
   post  'settings/addresses', to: 'addresses#create'
   patch 'settings/addresses', to: 'addresses#update'
-  # get  'cart', to: 'cart#index'
 
   resources :checkout
   resources :order_items, only: %i[create update destroy]
 
   resource :cart, only: %i[show update]
-
-  # resources :addresses, only: %i[edit create update]
-
-  # patch 'cart', to: 'cart#update'
-
-  # patch 'settings/update_password', to: 'user#update_password'
-  # patch 'settings/update_email',    to: 'user#update_email'
 
   resource :user, only: %i[edit] do
     collection do

@@ -1,5 +1,6 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Cart
+  -# - unless current_order.nil?
   - if !@order_items.empty?
     .books
       .hidden-xs

@@ -60,8 +60,6 @@ end
 
 def generate_order
   order = Order.new(
-    number: rand(200..2000),
-    compleated_at: Time.now,
     user_id: User.all.sample.id
     )
   order.save!

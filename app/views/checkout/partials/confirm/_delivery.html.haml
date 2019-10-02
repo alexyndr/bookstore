@@ -1,0 +1,9 @@
+.col-sm-3
+  %h3.general-subtitle= "Shipments"
+  %p.general-address
+    = "Delivery #{delivery.shipping_time}"
+    %span.general-edit
+      = link_to wizard_path(:address) do
+        = "edit"
+    %br
+    = delivery.name

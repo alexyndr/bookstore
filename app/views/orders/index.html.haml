@@ -1,0 +1,30 @@
+%main.container.general-main-wrap
+  %h1.mt-0.mb-25 My Orders
+  %p.lead.small.mb-10.visible-xs Sort by
+  .dropdowns.dropdown.general-order-dropdown
+    %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      Waiting for processing
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      %li
+        = link_to 'All', orders_path
+      %li
+        = link_to 'In delivery', orders_path(status: :in_delivery)
+      %li
+        = link_to 'Delivered', orders_path(status: :delivered)
+      %li
+        = link_to 'Canceled', orders_path(status: :canceled)
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Number
+          %th
+            %span.in-grey-600 Completed at
+          %th
+            %span.in-grey-600 Status
+          %th
+            %span.in-grey-600 Total
+      %tbody
+        = render partial: 'order', collection: @orders, as: :order

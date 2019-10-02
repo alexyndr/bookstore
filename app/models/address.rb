@@ -34,6 +34,11 @@ class Address < ApplicationRecord
                       message: 'Consist of + 0-9 only no special symbols' },
             length: { maximum: 15 }
 
+  def country_name
+    c = ISO3166::Country[country]
+    c.translations[I18n.locale.to_s] || c.name
+  end
+
   # scope :billing_address, -> { where(type: 'BillingAddress') }
   # scope :shipping_address, -> { where(type: 'ShippingAddress') }
   # enum addresses_type: { billing: 0, shipping: 1 }

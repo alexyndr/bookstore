@@ -3,31 +3,40 @@
 class AddressesController < ApplicationController
   authorize_resource
 
-  before_action :authenticate_user!, :set_addresses
-  attr_reader :address
+  before_action :set_addresses
+  # before_action :authenticate_user!, :set_addresses
+  # attr_reader :address
 
   def edit; end
 
   def update
-    if params[:address][:address_type] == 'billing'
-      @address_billing.update(safe_params)
-      current_user.save
-    elsif params[:address][:address_type] == 'shipping'
-      @address_shipping.update(safe_params)
-      current_user.save
-    end
+    @address_billing.update(safe_params) if params_address == 'billing'
+    @address_shipping.update(safe_params) if params_address == 'shipping'
+    current_user.save
     render :edit
   end
 
   private
 
-  def set_addresses
-    @address_shipping = address_type('shipping_address')
-    @address_billing = address_type('billing_address')
+  def params_address
+    params[:address][:address_type] unless params[:address].nil?
   end
 
-  def address_type(type)
-    current_user.send(type) || current_user.send("build_#{type}")
+  def set_addresses
+    @address_billing = set_address_billing
+    @address_shipping = set_address_shipping
+  end
+
+  def set_address_billing
+    return current_user.build_billing_address if params_address == 'billing'
+
+    current_user.billing_address || Address.new
+  end
+
+  def set_address_shipping
+    return current_user.build_shipping_address if params_address == 'shipping'
+
+    current_user.shipping_address || Address.new
   end
 
   def safe_params

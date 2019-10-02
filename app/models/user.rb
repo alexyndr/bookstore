@@ -7,10 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable,
          :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
-  # has_many :addresses, as: :addressable, dependent: :destroy
-  # has_many :addresses, dependent: :destroy
-  belongs_to :shipping_address, class_name: "Address", optional: true, autosave: true
-  belongs_to :billing_address, class_name: "Address", optional: true, autosave: true
+  belongs_to :shipping_address, class_name: 'Address', optional: true, autosave: true
+  belongs_to :billing_address, class_name: 'Address', optional: true, autosave: true
 
   has_many :reviews, dependent: :destroy
   has_many :orders, dependent: :destroy

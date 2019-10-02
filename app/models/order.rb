@@ -4,19 +4,18 @@ class Order < ApplicationRecord
   attr_accessor :active_admin_requested_event
   include AASM
 
-  belongs_to :shipping_address, class_name: "Address", optional: true, autosave: true
-  belongs_to :billing_address, class_name: "Address", optional: true, autosave: true
-  # has_many :addresses, as: :addressable, dependent: :destroy
-  # has_many :addresses, dependent: :destroy
+  belongs_to :shipping_address, class_name: 'Address', optional: true, autosave: true
+  belongs_to :billing_address, class_name: 'Address', optional: true, autosave: true
+
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
 
   has_one :coupon, dependent: :destroy
   has_one :card, dependent: :destroy
-  # has_many :books, through: :order_quantities
+
   has_many :order_items, dependent: :destroy
 
-  # scope :in_progress, -> { find_by(status: :in_progress) }
+  after_create :set_number
 
   enum status: {
     in_progress: 0,
@@ -45,8 +44,26 @@ class Order < ApplicationRecord
       transitions from: :in_delivery, to: :delivered
     end
 
-    event :canccanceledeled do
+    event :canceled do
       transitions from: %i[in_progress completed in_delivery delivered], to: :canceled
     end
+  end
+
+  def total
+    price_with_disc.round(2) + delivery.price || 0.00
+  end
+
+  private
+
+  def subtotal_price
+    order_items.sum { |item| item.quantity * item.book.price }
+  end
+
+  def price_with_disc
+    ((100 - (coupon ? coupon.discount.to_f : 0)) / 100) * subtotal_price
+  end
+
+  def set_number
+    update(number: "R#{id.to_s.rjust(8, '0')}")
   end
 end
