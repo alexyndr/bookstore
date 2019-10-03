@@ -1,0 +1,44 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand=t('header_footer.bookstore')
+    %a.shop-link.pull-right.hidden-xs{href: "/cart"}
+      %span.shop-icon
+        %span.shop-quantity= current_order&.order_items&.count
+    #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li
+            %a{href: "/"}=t('header_footer.home')
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}=t('header_footer.shop')
+            %ul.dropdown-menu
+              %li
+                %a{href: "/books"}=t('header_footer.all')
+              %li
+                %a.collapse-link{href: "/books?category_id=1"}=t('header_footer.mobile')
+              %li
+                %a.collapse-link{href: "/books?category_id=2"}=t('header_footer.photo')
+              %li
+                %a.collapse-link{href: "/books?category_id=3"}=t('header_footer.web')
+          - unless user_signed_in?
+            %li
+              %a{href: "/users/sign_in"}=t('header_footer.log_in')
+            %li
+              %a{href: "/users/sign_up"}=t('header_footer.sign_up')
+          - if user_signed_in?
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}=t('header_footer.my_account')
+              %ul.dropdown-menu
+                %li
+                  %a.collapse-link{href: "/orders"}=t('header_footer.orders')
+                %li
+                  %a.collapse-link{href: "/settings"}=t('header_footer.settings')
+                %li.divider{role: "separator"}
+                %li
+                  = link_to t('header_footer.log_out'), destroy_user_session_path, method: :delete

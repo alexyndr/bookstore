@@ -1,10 +1,10 @@
 .col-sm-3
-  %h3.general-subtitle= "#{type.capitalize} Address"
+  %h3.general-subtitle= "#{type.capitalize} #{t('addresses.address')}"
   %p.general-address
     = "#{address.first_name} #{address.last_name}"
     %span.general-edit
       = link_to wizard_path(:address) do
-        = "edit"
+        =t('checkout.edit')
     %br
     = address.address
     %br
@@ -13,4 +13,4 @@
     %br
     = address.country_name
     %br
-    = "Phone #{address.phone_number}"
+    = "#{t('checkout.phone')} #{address.phone_number}"

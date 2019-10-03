@@ -4,8 +4,6 @@ class AddressesController < ApplicationController
   authorize_resource
 
   before_action :set_addresses
-  # before_action :authenticate_user!, :set_addresses
-  # attr_reader :address
 
   def edit; end
 

@@ -13,7 +13,6 @@ class Book < ApplicationRecord
   has_many_attached :covers
 
   scope :by_category, ->(category_id) { where category_id: category_id }
-  # by_category { where(category_id) }
 
   validates :title, presence: true, uniqueness: true
   validates :price, presence: true, numericality: true

@@ -5,6 +5,6 @@ class HomeController < ApplicationController
   def index
     @books = Book.all
     @newest = NewestBooksQuery.call
-    @top_books = TopBooksQuery.call
+    @top_books = TopBooksQuery.call.first(4)
   end
 end

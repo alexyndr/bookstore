@@ -1,0 +1,15 @@
+.hidden-xs.divider-lg.pt-20
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600=t('checkout.book')
+        %th.col-method
+        %th
+          %span.in-grey-600=t('checkout.price')
+        %th
+          %span.in-grey-600=t('checkout.quantity')
+        %th
+          %span.in-grey-600=t('checkout.total')
+    %tbody
+      = render partial: "checkout/partials/book", collection: current_order.order_items, as: :order_item

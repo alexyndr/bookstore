@@ -6,11 +6,9 @@ ActiveAdmin.register Review do
   after_save do |review|
     event = params[:review][:active_admin_requested_event]
     unless event.blank?
-      # whitelist to ensure we don't run an arbitrary method
       safe_event = (review.aasm.events(permitted: true).map(&:name) & [event.to_sym]).first
       raise "Forbidden event #{event} requested on instance #{review.id}" unless safe_event
 
-      # launch the event with bang
       review.send("#{safe_event}!")
     end
   end
@@ -30,7 +28,7 @@ ActiveAdmin.register Review do
     column :user
     state_column :status
     actions defaults: false do |status|
-      link_to 'Change status', edit_admin_review_path(status)
+      link_to t('admin.change_status'), edit_admin_review_path(status)
     end
   end
 
@@ -39,8 +37,9 @@ ActiveAdmin.register Review do
     f.inputs do
       f.input :title, input_html: { disabled: true }
       f.input :text, input_html: { disabled: true }
+
       # use the attr_accessor to pass the data
-      f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection:
+      f.input :active_admin_requested_event, label: t('admin.change_state'), as: :radio, collection:
         f.object.aasm.events(permitted: true).map(&:name)
     end
     f.actions

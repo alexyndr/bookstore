@@ -1,6 +1,6 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title=t('sign_up')
+    %h3.general-login-title=t('devise.sign_up')
     =link_to user_facebook_omniauth_authorize_path, class: "general-login-icon", method: :post do
       %i.fa.fa-facebook-official
     %p.general-login-text or
@@ -13,13 +13,13 @@
       = f.label :password, class: "control-label input-label"
       - if @minimum_password_length
         %em
-          (#{@minimum_password_length}  #{t('char_min')})
+          (#{@minimum_password_length}  #{t('devise.char_min')})
       = f.password_field :password, autocomplete: "current-password", class: "form-control"
     .form-group.mb-30
       = f.label :password_confirmation, class: "control-label input-label"
       = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
     .text-center
-      = f.submit t('sign_up'), class: "btn btn-default mb-20"
+      = f.submit t('devise.sign_up'), class: "btn btn-default mb-20"
     %p.general-sign-text.text-center
-      =t('do_have_account')
-      %a.in-gold-500{href: "/users/sign_in"}=t('log_in')
+      =t('devise.do_have_account')
+      %a.in-gold-500{href: "/users/sign_in"}=t('devise.log_in')

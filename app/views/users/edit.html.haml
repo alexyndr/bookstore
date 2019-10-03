@@ -1,19 +1,19 @@
 %main.container
-  %h1.general-title-margin Settings
+  %h1.general-title-margint=t('addresses.settings')
   %ul.nav.clearfix.mb-20{role: "tablist"}
     %li.tab-item.active{role: "presentation"}
-      %a.tab-link{href: "/settings/addresses"} Address
+      %a.tab-link{href: "/settings/addresses"}=t('addresses.address')
     %li.tab-item{role: "presentation"}
-      %a.tab-link{href: "/settings"} Privacy
+      %a.tab-link{href: "/settings"}=t('addresses.privacy')
   .tab-content
     #privacy.tab-pane.fade.in.active.general-main-wrap{role: "tabpanel"}
       .row.mb-60
         .col-sm-5
-          %p.in-gold-500.font-18.mb-25 Email
+          %p.in-gold-500.font-18.mb-25=t('addresses.email')
           = render 'edit_email'
         .col-sm-5.col-sm-offset-1
-          %p.in-gold-500.font-18.mb-25 Password
+          %p.in-gold-500.font-18.mb-25=t('addresses.password')
           = render 'edit_password'
         .col-sm-12
-          %p.in-gold-500.font-18.mb-25 Remove Account
+          %p.in-gold-500.font-18.mb-25=t('addresses.remove_account')
           = render 'remove_account'

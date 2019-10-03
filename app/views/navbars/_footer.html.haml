@@ -4,17 +4,17 @@
       .col-sm-9
         %ul.list-inline.general-align.mb-25
           %li
-            %a.nav-link{href: "/"}=t('home')
+            %a.nav-link{href: "/"}=t('header_footer.home')
           %li
-            %a.nav-link{href: "/books"}=t('shop')
+            %a.nav-link{href: "/books"}=t('header_footer.shop')
           - if user_signed_in?
             %li
-              %a.nav-link{href: "/orders"}=t('orders')
+              %a.nav-link{href: "/orders"}=t('header_footer.orders')
             %li
-              %a.nav-link{href: "/settings"}=t('settings')
+              %a.nav-link{href: "/settings"}=t('header_footer.settings')
       .col-sm-3
-        %p.general-nav-mail=t('email')
-        %p.general-nav-number=t('phone_num')
+        %p.general-nav-mail=t('header_footer.email')
+        %p.general-nav-number=t('header_footer.phone_num')
         %ul.list-inline.general-align
           %li
             %a.nav-link{href: "https://www.facebook.com/"}

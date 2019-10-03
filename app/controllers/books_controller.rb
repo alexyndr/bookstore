@@ -9,15 +9,15 @@ class BooksController < ApplicationController
 
   BOOKS_PER_PAGE = 12
 
+  def index
+    @pagy, @books = pagy(SorterBooksQuery.new(Book.all, params).call,
+                         items: BOOKS_PER_PAGE, link_extra: 'data-remote="true"')
+  end
+
   def show
     @book = Book.find(params[:id])
     @order_item = current_order.order_items.build
     @reviews = @book.reviews
-  end
-
-  def index
-    @pagy, @books = pagy(SorterBooksQuery.new(Book.all, params).call,
-                         items: BOOKS_PER_PAGE, link_extra: 'data-remote="true"')
   end
 
   private

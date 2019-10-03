@@ -9,7 +9,7 @@
         %div
           .general-message-date.hidden-xs= review.created_at.strftime("%B %d, %Y")
           .max-240
-            .general-message-verified=t('verified')
+            .general-message-verified=t('book_pages.verified')
             .general-message-name= review.user.name
         .mb-15
           - review.score.times do

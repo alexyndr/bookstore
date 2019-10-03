@@ -6,11 +6,9 @@ ActiveAdmin.register Order do
   after_save do |order|
     event = params[:order][:active_admin_requested_event]
     unless event.blank?
-      # whitelist to ensure we don't run an arbitrary method
       safe_event = (order.aasm.events(permitted: true).map(&:name) & [event.to_sym]).first
       raise "Forbidden event #{event} requested on instance #{order.id}" unless safe_event
 
-      # launch the event with bang
       order.send("#{safe_event}!")
     end
   end
@@ -31,7 +29,7 @@ ActiveAdmin.register Order do
     column :user
     column :created_at
     actions defaults: false do |status|
-      link_to 'Change status', edit_admin_order_path(status)
+      link_to t('admin.change_status'), edit_admin_order_path(status)
     end
   end
 
@@ -41,7 +39,7 @@ ActiveAdmin.register Order do
       f.input :status, input_html: { disabled: true }, as: :string, label: 'Current state'
 
       # use the attr_accessor to pass the data
-      f.input :active_admin_requested_event, label: 'Change state', as: :radio, collection:
+      f.input :active_admin_requested_event, label: t('admin.change_state'), as: :radio, collection:
         f.object.aasm.events(reject: %i[in_progress completed in_delivery]).map(&:name)
     end
     f.actions

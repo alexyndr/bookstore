@@ -17,8 +17,6 @@ ActiveAdmin.register Book do
       end
     end
 
-    # image_column :cover, style: :thumb
-
     column :title
 
     column :authors, &:names_of_authors
@@ -71,7 +69,7 @@ ActiveAdmin.register Book do
       row :updated_at
     end
     if book.reviews.approved.present?
-      panel 'Reviews' do
+      panel t('admin.reviews') do
         table_for book.reviews.approved do
           column :title
           column :user
@@ -81,17 +79,4 @@ ActiveAdmin.register Book do
     end
     active_admin_comments
   end
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 end
