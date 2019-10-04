@@ -4,6 +4,8 @@ en:
     under_welcome: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
     best_sellers: "Best Sellers"
     get_started: "Get Started"
+    previous: "Previous"
+    next: "Next"
   header_footer:
     log_out: "Log out"
     log_in: "Log In"
@@ -37,7 +39,7 @@ en:
     title: "Title"
     review: "Review"
     view_more: "View More"
-    catalog: "Сatalog"
+    catalog: "Catalog"
     newest_first: "Newest first"
     a_z: "Title: A - Z"
     z_a: "Title: Z - A"
@@ -45,7 +47,7 @@ en:
     low_to_hight: "Price: Low to Hight"
     popular: "Popular"
     all: "All"
-  device:
+  devise:
     dont_have_account: "Don’t have an Account?"
     do_have_account: "Do you have an Account?"
     forgot_pass: "Forgot password?"

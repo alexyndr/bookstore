@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand=t('header_footer.bookstore')
+      = link_to t('header_footer.bookstore'), books_path, class: "navbar-brand"
     %a.shop-link.pull-right.hidden-xs{href: "/cart"}
       %span.shop-icon
         %span.shop-quantity= current_order&.order_items&.count

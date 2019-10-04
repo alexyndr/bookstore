@@ -12,7 +12,7 @@ FactoryBot.define do
     phone_number { '+380933455' }
   end
 
-  trait :billing do
-    type { Address.address_type[0] }
-  end
+  # trait :billing do
+  #   type { Address.address_type[0] }
+  # end
 end

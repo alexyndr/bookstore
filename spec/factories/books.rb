@@ -11,12 +11,18 @@ FactoryBot.define do
     depth            { FFaker::Random.rand(2) }
     materials        { 'plastic' }
     publication_year { 2002 }
+
+    after(:build) do |book|
+      file_path = Rails.root.join('spec', 'fixtures', 'files', 'test_cover.jpg')
+      file = Rack::Test::UploadedFile.new(file_path, 'image/jpg')
+      book.covers.attach(file)
+    end
   end
 
   trait :attach_covers do
     after(:build) do |book|
       file_path = Rails.root.join('spec', 'fixtures', 'files', 'test_cover.jpg')
-      file = Rack::Test::UploadedFile.new(file_path, 'image/png')
+      file = Rack::Test::UploadedFile.new(file_path, 'image/jpg')
       book.covers.attach(file)
     end
   end

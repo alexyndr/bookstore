@@ -37,11 +37,12 @@
                 %p.font-16=t('checkout.subtotal')
               %td
                 %p.font-16= price_euro(item_total_price)
-            %tr
-              %td
-                %p.font-16=t('checkout.delivery')
-              %td
-                %p.font-16= price_euro(@checkout.order&.delivery&.price || 0)
+            - if @checkout.order&.delivery
+              %tr
+                %td
+                  %p.font-16=t('checkout.delivery')
+                %td
+                  %p.font-16= price_euro(@checkout.order.delivery.price)
             %tr
               %td
                 %strong.font-18=t('checkout.order_total')

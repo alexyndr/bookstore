@@ -26,7 +26,7 @@ describe 'Log in', type: :feature do
 
   it 'when click forgot password' do
     # find('a', text: 'Forgot your password?').click
-    click_link(I18n.t('forgot_pass'))
+    click_link(I18n.t('devise.forgot_pass'))
     expect(page).to have_content 'Forgot your password'
     expect(page).to have_current_path new_user_password_path
   end

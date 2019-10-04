@@ -20,7 +20,7 @@ def generate_book
 
   book.save!
   file = open("#{FFaker::Book.cover}")
-  book.covers.attach(io: file, filename: 'image.jpg', content_type: 'image/jpg')
+  book.covers.attach(io: file, filename: 'image.png', content_type: 'image/png')
 end
 
 def generate_author

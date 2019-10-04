@@ -4,14 +4,16 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   context 'with db colums' do
-    it { is_expected.to have_db_column(:number).of_type(:integer) }
+    it { is_expected.to have_db_column(:number).of_type(:string) }
     it { is_expected.to have_db_column(:status).of_type(:integer) }
     it { is_expected.to have_db_column(:compleated_at).of_type(:datetime) }
   end
 
   describe 'associations' do
     it { is_expected.to belong_to(:user).without_validating_presence }
-    it { is_expected.to have_many(:addresses) }
+    # it { is_expected.to belong_to(:address) }
+    it { should belong_to(:shipping_address).class_name('Address').without_validating_presence }
+    it { should belong_to(:billing_address).class_name('Address').without_validating_presence }
   end
 
   describe 'status enum value' do

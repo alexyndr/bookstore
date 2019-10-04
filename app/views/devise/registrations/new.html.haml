@@ -8,7 +8,7 @@
     = devise_error_messages!
     .form-group.mb-30
       = f.label :email, class: "control-label input-label"
-      = f.email_field :email, placeholder: "Enter Email", autofocus: true, autocomplete: "email", class: "form-control"
+      = f.email_field :email, placeholder: t('devise.enter_email'), autofocus: true, autocomplete: "email", class: "form-control"
     .form-group.mb-30
       = f.label :password, class: "control-label input-label"
       - if @minimum_password_length
