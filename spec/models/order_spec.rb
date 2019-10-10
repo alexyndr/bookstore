@@ -11,8 +11,8 @@ RSpec.describe Order, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:user).without_validating_presence }
-    it { should belong_to(:shipping_address).class_name('Address').without_validating_presence }
-    it { should belong_to(:billing_address).class_name('Address').without_validating_presence }
+    it { is_expected.to belong_to(:shipping_address).class_name('Address').without_validating_presence }
+    it { is_expected.to belong_to(:billing_address).class_name('Address').without_validating_presence }
   end
 
   describe 'status enum value' do

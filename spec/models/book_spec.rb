@@ -14,7 +14,7 @@ RSpec.describe Book, type: :model do
 
   describe 'scope' do
     it 'by category id' do
-      expect(Book.by_category(1)).to eq Book.where(category_id: 1)
+      expect(described_class.by_category(1)).to eq described_class.where(category_id: 1)
     end
   end
 

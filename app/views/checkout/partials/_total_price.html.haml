@@ -2,19 +2,20 @@
   %td
     %p.font-16= t('checkout.subtotal')
   %td
-    %p.font-16= price_euro(subtotal_price_sum)
-%tr
-  %td
-    %p.font-16= t('checkout.delivery')
-  %td
-    %p.font-16= price_euro(current_order.delivery.price)
+    %p.font-16= price_euro(current_order.subtotal_price)
+- unless step == :address
+  %tr
+    %td
+      %p.font-16= t('checkout.delivery')
+    %td
+      %p.font-16= price_euro(current_order.delivery&.price || 0.00)
 %tr
   %td
     %p.font-16= t('checkout.coupon')
   %td
-    %p.font-16= price_euro(subtotal_price_sum - item_total_price)
+    %p.font-16= price_euro(current_order.discount)
 %tr
   %td
     %strong.font-18= t('checkout.order_total')
   %td
-    %strong.font-18= price_euro(item_total_price + current_order.delivery.price)
+    %strong.font-18= price_euro(current_order.total)

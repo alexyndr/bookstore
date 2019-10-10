@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 describe 'Checkout page', type: :feature do
-  let(:email){'safe@safe.com'}
-  let!(:book){create(:book)}
-  let!(:deliveries){create_list(:delivery, 2)}
-  let(:address_params){ attributes_for(:address) }
-  let(:card_params){ attributes_for(:card) }
+  let(:email) { 'safe@safe.com' }
+  let!(:book) { create(:book) }
+  let!(:deliveries) { create_list(:delivery, 2) }
+  let(:address_params) { attributes_for(:address) }
+  let(:card_params) { attributes_for(:card) }
 
-  scenario 'Checkout process' do
+  it 'Checkout process' do
     visit(root_path)
     find('.btn-primary').click
     visit(cart_path)
@@ -17,7 +17,7 @@ describe 'Checkout page', type: :feature do
 
     expect(page).to have_current_path checkout_path(:login)
 
-    within('#new_customer'){ fill_in 'user[email]', with: email }
+    within('#new_customer') { fill_in 'user[email]', with: email }
     click_button I18n.t('checkout.continue_to_checkout')
 
     expect(page).to have_current_path root_path
@@ -41,12 +41,12 @@ describe 'Checkout page', type: :feature do
       click_button(I18n.t('checkout.save_and_continue'))
     end
 
-    expect(page.current_path).to eq checkout_path(:delivery)
+    expect(page).to have_current_path checkout_path(:delivery)
 
     all('.radio_label').first.click
     click_button(I18n.t('checkout.save_and_continue'))
 
-    expect(page.current_path).to eq checkout_path(:payment)
+    expect(page).to have_current_path checkout_path(:payment)
 
     within('form#new_card') do
       fill_in 'card[number]', with: card_params[:number]
@@ -57,11 +57,10 @@ describe 'Checkout page', type: :feature do
       click_button(I18n.t('checkout.save_and_continue'))
     end
 
-    expect(page.current_path).to eq checkout_path(:confirm)
+    expect(page).to have_current_path checkout_path(:confirm)
 
     click_button(I18n.t('checkout.place_order'))
 
-    expect(page.current_path).to eq checkout_path(:complete)
+    expect(page).to have_current_path checkout_path(:complete)
   end
-
 end

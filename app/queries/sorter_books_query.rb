@@ -8,7 +8,6 @@ class SorterBooksQuery
 
   def call
     @books = @books.by_category(current_category) if current_category.present?
-    # return @books = @books.joins(:order_items).group(:id).order('sum(order_items.quantity) DESC') if params[:top_sort]
     return @books = @books.includes(:order_items).order('order_items.quantity ASC') if params[:top_sort]
 
     @books = @books.order("#{params[:sort]} #{params[:direction]}")

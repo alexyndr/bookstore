@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Review, type: :model do
@@ -20,7 +22,7 @@ RSpec.describe Review, type: :model do
 
   describe 'scopes' do
     it 'approved' do
-      expect(Review.approved).to eq Review.where(status: 1)
+      expect(described_class.approved).to eq described_class.where(status: 1)
     end
   end
 

@@ -13,7 +13,7 @@ RSpec.describe OrderItem, type: :model do
 
   describe 'scope' do
     it 'by_created' do
-      expect(OrderItem.by_created).to eq OrderItem.order(created_at: :desc)
+      expect(described_class.by_created).to eq described_class.order(created_at: :desc)
     end
   end
 end

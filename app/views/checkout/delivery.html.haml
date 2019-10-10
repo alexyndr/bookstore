@@ -32,21 +32,6 @@
         .general-text-align
           %p.in-gold-500.font-18=t('checkout.order_summary')
           %table.general-summary-table
-            %tr
-              %td
-                %p.font-16=t('checkout.subtotal')
-              %td
-                %p.font-16= price_euro(item_total_price)
-            - if @checkout.order&.delivery
-              %tr
-                %td
-                  %p.font-16=t('checkout.delivery')
-                %td
-                  %p.font-16= price_euro(@checkout.order.delivery.price)
-            %tr
-              %td
-                %strong.font-18=t('checkout.order_total')
-              %td
-                %strong.font-18= price_euro(item_total_price + (@checkout.order&.delivery&.price || 0))
+            = render "checkout/partials/total_price"
         .text-center
           = f.button :submit, t('checkout.save_and_continue'), class: 'btn btn-default mb-20'

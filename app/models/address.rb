@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Address < ApplicationRecord
-  # has_many :orders, dependent: :destroy
-  # has_many :users, foreign_key: :shipping_address_id, dependent: :destroy
-
   validates :first_name, :last_name,
             presence: true,
             format: { with: /\A[a-zA-Z]*\z/,

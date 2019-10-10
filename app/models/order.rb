@@ -52,7 +52,7 @@ class Order < ApplicationRecord
   end
 
   def total
-    price_with_disc + delivery.price || 0.00
+    price_with_disc + (delivery&.price || 0.00)
   end
 
   def subtotal_price

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= Ability.new(current_user, session)
   end
-  
+
   def current_order
     @current_order ||= set_current_order
     @current_order = @current_order.in_progress? ? @current_order : set_current_order

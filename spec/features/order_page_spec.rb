@@ -9,13 +9,13 @@ describe 'Order page', type: :feature do
 
   before { login_as(user, scope: :user) }
 
-  scenario 'Order page' do
+  it 'Order page' do
     visit(root_path)
 
     find('#my_account').click
     find('#my_account').find('.orders').click
 
-    expect(page.current_path).to eq orders_path
+    expect(page).to have_current_path orders_path
 
     find('#dropdown').click
     find('#dropdown').find('.canceled').click
@@ -37,5 +37,4 @@ describe 'Order page', type: :feature do
 
     expect(page).to have_content(order.number)
   end
-
 end

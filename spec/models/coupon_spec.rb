@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Coupon, type: :model do
-
   context 'with db colums' do
     it { is_expected.to have_db_column(:code).of_type(:string) }
     it { is_expected.to have_db_column(:active).of_type(:boolean) }
@@ -14,11 +15,11 @@ RSpec.describe Coupon, type: :model do
 
   describe 'scope' do
     it 'active' do
-      expect(Coupon.active).to eq Coupon.where(active: true)
+      expect(described_class.active).to eq described_class.where(active: true)
     end
 
     it 'not_active' do
-      expect(Coupon.not_active).to eq Coupon.where(active: false)
+      expect(described_class.not_active).to eq described_class.where(active: false)
     end
   end
 end

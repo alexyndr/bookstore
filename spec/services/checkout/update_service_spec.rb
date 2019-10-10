@@ -34,6 +34,7 @@ RSpec.describe Checkout::UpdateManagerService do
 
   describe 'confirm step' do
     let(:params) { {} }
+
     before { service.call(:confirm) }
 
     it { expect(session[:current_order_id]).to eq nil }

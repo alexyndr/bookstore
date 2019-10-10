@@ -6,7 +6,6 @@
     = render partial: "checkout/partials/confirm/delivery", locals: {delivery: @checkout.current_delivery}
     = render partial: "checkout/partials/confirm/card", locals: {card: @checkout.card}
   = render "checkout/partials/table_for_books"
-  -#       = render partial: "checkout/partials/book", collection: current_order.order_items, as: :order_item
   .text-center.general-text-right
     %p.in-gold-500.font-18=t('checkout.order_summary')
     %table.general-summary-table.general-summary-table-right.general-text-right

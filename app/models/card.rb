@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Card < ApplicationRecord
   belongs_to :order, dependent: :destroy
 
@@ -9,5 +11,5 @@ class Card < ApplicationRecord
   validates :number, :cvv, numericality: { only_integer: true }
 
   validates :card_holder, format: /\A[a-zA-Z]*\s*[a-zA-Z]*\z/
-  validates :valid_thru, format: /\A(0[1-9]|10|11|12)\/\d{2}\z/
+  validates :valid_thru, format: %r{\A(0[1-9]|10|11|12)/\d{2}\z}
 end

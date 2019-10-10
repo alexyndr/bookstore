@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Checkout::ShowManagerService do
-  subject(:service) {described_class.new(order, user)}
+  subject(:service) { described_class.new(order, user) }
 
-  let(:user) {create(:user)}
-  let(:order) {create(:order, :add_addresses, :add_coupon, user: user)}
+  let(:user) { create(:user) }
+  let(:order) { create(:order, :add_addresses, :add_coupon, user: user) }
 
   describe 'address step' do
-    it { expect(service.call(:address)).to eq true}
+    it { expect(service.call(:address)).to eq true }
   end
 
   describe 'delivery step' do
@@ -15,13 +17,13 @@ RSpec.describe Checkout::ShowManagerService do
   end
 
   describe 'payment step' do
-    let!(:card) {create(:card, order: order)}
+    let!(:card) { create(:card, order: order) }
 
     it { expect(service.call(:payment)).to eq Card.first }
   end
 
   describe 'confirm step' do
-    let!(:card) {create(:card, order: order)}
+    let!(:card) { create(:card, order: order) }
 
     it { expect(service.call(:payment)).to eq Card.first }
   end

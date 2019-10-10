@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CheckoutController < ApplicationController
   include Wicked::Wizard
 
@@ -5,7 +7,6 @@ class CheckoutController < ApplicationController
 
   def show
     show_manager
-    # redirect_to checkout_path(:login) unless current_user
 
     if current_order.order_items.empty? && step != :complete # || !current_user && step != :login
       redirect_to root_path

@@ -31,8 +31,5 @@ AllCops:
     - db/**/*
     - config/**/*
     - app/channels/**/*
-    - 'Gemfile'
     - 'config.ru'
     - app/controllers/users/omniauth_callbacks_controller.rb
-    - app/models/user.rb
-    - spec/models/*

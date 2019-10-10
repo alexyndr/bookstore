@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Checkout::CompleteService do
-  subject(:service) {described_class.new(order, user)}
+  subject(:service) { described_class.new(order, user) }
 
-  let(:user) {create(:user)}
+  let(:user) { create(:user) }
 
   describe 'address step' do
-    let(:order) {create(:order, user: user)}
+    let(:order) { create(:order, user: user) }
 
-    it { expect(service.call(:address)).to eq user}
+    it { expect(service.call(:address)).to eq user }
   end
 
   describe 'delivery step' do

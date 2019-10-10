@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Checkout::CompleteService
   def initialize(order, user)
     @order = order

@@ -60,7 +60,7 @@ describe 'Cart page', type: :feature do
     it 'click checkout' do
       # click_button I18n.t('cart.checkout')
       find('.text-center').find('.btn-default').click
-      expect(page.current_path).to eq checkout_path(:address)
+      expect(page).to have_current_path checkout_path(:address)
     end
 
     it 'delete book' do
