@@ -11,8 +11,4 @@ FactoryBot.define do
     country { 'Ukraine' }
     phone_number { '+380933455' }
   end
-
-  # trait :billing do
-  #   type { Address.address_type[0] }
-  # end
 end

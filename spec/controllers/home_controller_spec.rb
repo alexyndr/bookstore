@@ -8,6 +8,10 @@ RSpec.describe HomeController, type: :controller do
       get :index
     end
 
+    it '@top_books instance exist' do
+      expect(assigns(:top_books)).not_to be_nil
+    end
+
     it '@newest instance exist' do
       expect(assigns(:newest)).not_to be_nil
     end

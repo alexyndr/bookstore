@@ -19,6 +19,12 @@ FactoryBot.define do
     end
   end
 
+  trait :attach_author do
+    after(:create) do |book|
+      create(:author, books: [book])
+    end
+  end
+
   trait :attach_covers do
     after(:build) do |book|
       file_path = Rails.root.join('spec', 'fixtures', 'files', 'test_cover.jpg')

@@ -5,8 +5,9 @@ class CheckoutController < ApplicationController
 
   def show
     show_manager
+    # redirect_to checkout_path(:login) unless current_user
 
-    if current_order.order_items.empty? && step != :complete
+    if current_order.order_items.empty? && step != :complete # || !current_user && step != :login
       redirect_to root_path
     else
       render_wizard

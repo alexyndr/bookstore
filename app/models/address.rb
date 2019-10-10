@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class Address < ApplicationRecord
-  # belongs_to :user, optional: true
-  # belongs_to :order, optional: true
-
-  # belongs_to :addressable, polymorphic: true # , optional: true
-
-  has_many :orders, dependent: :destroy
-  has_many :users, dependent: :destroy
+  # has_many :orders, dependent: :destroy
+  # has_many :users, foreign_key: :shipping_address_id, dependent: :destroy
 
   validates :first_name, :last_name,
             presence: true,
@@ -38,8 +33,4 @@ class Address < ApplicationRecord
     c = ISO3166::Country[country]
     c.translations[I18n.locale.to_s] || c.name
   end
-
-  # scope :billing_address, -> { where(type: 'BillingAddress') }
-  # scope :shipping_address, -> { where(type: 'ShippingAddress') }
-  # enum addresses_type: { billing: 0, shipping: 1 }
 end

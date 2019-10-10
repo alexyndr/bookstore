@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Delivery, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'with db colums' do
+    it { is_expected.to have_db_column(:name).of_type(:string) }
+    it { is_expected.to have_db_column(:shipping_time).of_type(:string) }
+    it { is_expected.to have_db_column(:price).of_type(:decimal) }
+  end
 end

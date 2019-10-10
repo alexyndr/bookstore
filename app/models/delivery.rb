@@ -1,3 +1,3 @@
 class Delivery < ApplicationRecord
-  has_one :delivery
+  # has_one :delivery
 end

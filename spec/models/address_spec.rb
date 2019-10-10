@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
+  let(:address) { create(:address, country: 'AX') }
+
   context 'with db colums' do
     it { is_expected.to have_db_column(:first_name).of_type(:string) }
     it { is_expected.to have_db_column(:last_name).of_type(:string) }
@@ -14,8 +16,7 @@ RSpec.describe Address, type: :model do
   end
 
   # describe 'associations' do
-  #   # it { should have_many(:users).class_name('Address').with_foreign_key(:shipping_address) }
-  #   # it { should have_many(:users).without_validating_presence }
+  #   it { should have_many(:users).with_foreign_key('shipping_address_id') }
   # end
 
   describe 'validations' do
@@ -23,5 +24,9 @@ RSpec.describe Address, type: :model do
     it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_presence_of(:zip) }
     it { is_expected.to validate_presence_of(:phone_number) }
+  end
+
+  it 'return country name' do
+    expect(address.country_name).to eq('Åland Islands')
   end
 end

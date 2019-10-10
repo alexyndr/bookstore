@@ -31,6 +31,7 @@ class Checkout::UpdateManagerService
   end
 
   def confirm
+    OrderMailer.complete_order(@order).deliver
     @order.update(compleated_at: Time.now)
     @session.delete(:current_order_id)
   end
@@ -45,20 +46,20 @@ class Checkout::UpdateManagerService
     end
   end
 
-  def update_shipping(type_of_shipping)
-    @order.shipping_address.update(address_params(type_of_shipping))
-  end
-
   def create_shipping(type_of_shipping)
     @order.create_shipping_address(address_params(type_of_shipping))
   end
 
-  def update_billing(type_of_billing)
-    @order.billing_address.update(address_params(type_of_billing))
-  end
-
   def create_billing(type_of_billing)
     @order.create_billing_address(address_params(type_of_billing))
+  end
+
+  def update_shipping(type_of_shipping)
+    @order.shipping_address.update(address_params(type_of_shipping))
+  end
+
+  def update_billing(type_of_billing)
+    @order.billing_address.update(address_params(type_of_billing))
   end
 
   def address_params(type)

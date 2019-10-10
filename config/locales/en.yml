@@ -116,6 +116,7 @@ en:
     order_total: "Order Total:"
     checkout: "Checkout"
     sorry: "Sorry but you have not books yet"
+    discount: "€0.00"
   checkout:
     card: "Credit Card"
     card_number: "Card Number"
@@ -158,3 +159,6 @@ en:
     shipments: "Shipments"
     payment_info: "Payment Information"
     delivered: "Delivery"
+  mailer:
+    subject: "Order completed"
+    message: "Your order %{number} has been completed!"

@@ -1,5 +1,5 @@
 class Card < ApplicationRecord
-  belongs_to :order
+  belongs_to :order, dependent: :destroy
 
   validates :number, :card_holder, :valid_thru, :cvv, presence: true
 

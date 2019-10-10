@@ -5,6 +5,4 @@ class Coupon < ApplicationRecord
 
   scope :active, -> { where active: true }
   scope :not_active, -> { where active: false }
-
-  # validates :order_id, uniqueness: true
 end

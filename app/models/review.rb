@@ -10,7 +10,7 @@ class Review < ApplicationRecord
   validates :title, :text, :score, presence: true
   validates :score, numericality: true
 
-  scope :approved, -> { where(status: 'approved') }
+  # scope :approved, -> { where(status: 'approved') } # TODO:try to remove
 
   enum status: {
     waiting: 0,

@@ -32,11 +32,11 @@
             %li
               %a{href: "/users/sign_up"}=t('header_footer.sign_up')
           - if user_signed_in?
-            %li.dropdown
+            %li.dropdown#my_account
               %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}=t('header_footer.my_account')
               %ul.dropdown-menu
                 %li
-                  %a.collapse-link{href: "/orders"}=t('header_footer.orders')
+                  %a.collapse-link.orders{href: "/orders"}=t('header_footer.orders')
                 %li
                   %a.collapse-link{href: "/settings"}=t('header_footer.settings')
                 %li.divider{role: "separator"}

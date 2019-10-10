@@ -19,7 +19,7 @@ class Checkout::CompleteService
   end
 
   def delivery
-    @order.billing_address && @order.shipping_address
+    @order.billing_address.present? && @order.shipping_address.present?
   end
 
   def payment

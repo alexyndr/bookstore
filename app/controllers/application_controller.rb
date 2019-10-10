@@ -3,20 +3,12 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  helper_method :current_order, :item_total_price, :subtotal_price_sum
+  helper_method :current_order
 
   def current_ability
     @current_ability ||= Ability.new(current_user, session)
   end
-
-  def subtotal_price_sum
-    current_order.order_items.sum { |item| item.quantity * item.book.price }
-  end
-
-  def item_total_price
-    ((100 - (current_order.coupon ? current_order.coupon.discount.to_f : 0)) / 100) * subtotal_price_sum
-  end
-
+  
   def current_order
     @current_order ||= set_current_order
     @current_order = @current_order.in_progress? ? @current_order : set_current_order
@@ -29,8 +21,6 @@ class ApplicationController < ActionController::Base
       order = current_user.orders.in_progress.first_or_create
       order.coupon = session_order.coupon if session_order.coupon
       order.order_items << session_order.order_items
-      # session[:current_order_id] = order.id
-      # session_order.delete
       return order
     end
     session_order

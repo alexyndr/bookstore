@@ -2,9 +2,31 @@
 
 FactoryBot.define do
   factory :order do
-    association(:user)
+    association(:delivery)
+    user { nil }
     number { 1 }
     status { 0 }
-    compleated_at { '2019-08-16 11:38:26' }
+  end
+
+  trait :add_coupon do
+    after(:create) do |order|
+      order.coupon = create(:coupon)
+      order.save
+    end
+  end
+
+  trait :add_delivery do
+    after(:create) do |order|
+      order.delivery = create(:delivery)
+      order.save
+    end
+  end
+
+  trait :add_addresses do
+    after(:create) do |order|
+      order.billing_address = create(:address)
+      order.shipping_address = create(:address)
+      order.save
+    end
   end
 end

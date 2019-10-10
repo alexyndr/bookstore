@@ -20,19 +20,23 @@ RSpec.describe AddressesController, type: :controller do
     end
   end
 
-  context 'when GPATCH #update' do
+  context 'when PATCH #update' do
     let(:address_params) do
-      { address: attributes_for(:address), type: 'ShippingAddress' }
+      { address: attributes_for(:address) }
     end
 
     before { patch :update, params: address_params }
 
-    it 'creates address' do
-      expect(response).to render_template(:edit)
-    end
-
     it 'assigns address_shipping' do
       expect(assigns(:address_shipping)).not_to be_nil
+    end
+
+    it 'assigns address_billing' do
+      expect(assigns(:address_billing)).not_to be_nil
+    end
+
+    it 'creates address' do
+      expect(response).to render_template(:edit)
     end
 
     it 'return a success response' do

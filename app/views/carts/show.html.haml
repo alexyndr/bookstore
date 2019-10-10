@@ -25,14 +25,14 @@
               %div
                 = form.submit t('cart.apply_coupon'), class: "btn btn-primary mr-5 mb-15"
           .col-sm-8
-            .res-mr-200.text-center.general-text-right
+            .res-mr-200.general-text-right
               %p.in-gold-500.font-18=t('cart.order_summary')
               %table.general-summary-table.general-summary-table-right.general-text-right
                 %tr
                   %td
                     %p.font-16=t('cart.subtotal')
                   %td
-                    %p.font-16= price_euro(subtotal_price_sum)
+                    %p.font-16= price_euro(@subtotal_price_sum)
                 %tr
                   %td
                     %p.font-16=t('cart.coupon')
@@ -42,8 +42,8 @@
                   %td
                     %strong.font-18=t('cart.order_total')
                   %td
-                    %strong.font-18= price_euro(item_total_price)
+                    %strong.font-18= price_euro(@item_total_price)
       .text-center
-        = link_to t('cart.checkout'), checkout_path(:login), class: "btn btn-default mb-20 hidden-xs"
+        = link_to t('cart.checkout'), checkout_path(:login), class: "btn btn-default mb-20"
   - else
     %h2.general-title-margin.in-gold-500=t('cart.sorry')

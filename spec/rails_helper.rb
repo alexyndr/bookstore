@@ -8,6 +8,7 @@ require 'simplecov'
 require 'aasm/rspec'
 require 'rspec/rails'
 require 'capybara/rails'
+# require 'capybara/dsl'
 
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
@@ -24,7 +25,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-# Capybara.default_driver = :selenium_chrome
+Capybara.default_driver = :selenium_chrome
+# Capybara.ignore_hidden_elements = true
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

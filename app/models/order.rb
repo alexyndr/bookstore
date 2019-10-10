@@ -17,6 +17,8 @@ class Order < ApplicationRecord
 
   after_create :set_number
 
+  scope :order_not_in_progress, -> { where.not(status: :in_progress) }
+
   enum status: {
     in_progress: 0,
     completed: 1,
@@ -50,18 +52,22 @@ class Order < ApplicationRecord
   end
 
   def total
-    price_with_disc.round(2) + delivery.price || 0.00
+    price_with_disc + delivery.price || 0.00
   end
-
-  private
 
   def subtotal_price
     order_items.sum { |item| item.quantity * item.book.price }
   end
 
+  def discount
+    subtotal_price - price_with_disc || 0.00
+  end
+
   def price_with_disc
     ((100 - (coupon ? coupon.discount.to_f : 0)) / 100) * subtotal_price
   end
+
+  private
 
   def set_number
     update(number: "R#{id.to_s.rjust(8, '0')}")

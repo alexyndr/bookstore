@@ -14,11 +14,12 @@
         .mb-40
           %p.mb-5=t('checkout.quick_register')
           %p.general-info-text.font-12.mb-20=t('checkout.password_later')
-        .mb-30
-          = f.label :email, class: "control-label input-label"
-          = f.email_field :email, placeholder: t('checkout.enter_email'), class: "form-control"
-          - password = Devise.friendly_token
-          = f.hidden_field :password, value: password
-          = f.hidden_field :password_confirmation, value: password
-        .text-center
-          = f.submit t('checkout.continue_to_checkout'), class: 'button btn btn-default mb-20'
+        #new_customer
+          .mb-30
+            = f.label :email, class: "control-label input-label"
+            = f.email_field :email, placeholder: t('checkout.enter_email'), class: "form-control"
+            - password = Devise.friendly_token
+            = f.hidden_field :password, value: password
+            = f.hidden_field :password_confirmation, value: password
+          .text-center
+            = f.submit t('checkout.continue_to_checkout'), class: 'button btn btn-default mb-20'

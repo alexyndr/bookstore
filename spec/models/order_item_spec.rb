@@ -10,4 +10,10 @@ RSpec.describe OrderItem, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:book) }
   end
+
+  describe 'scope' do
+    it 'by_created' do
+      expect(OrderItem.by_created).to eq OrderItem.order(created_at: :desc)
+    end
+  end
 end
