@@ -319,6 +319,7 @@ DEPENDENCIES
   factory_bot_rails
   ffaker
   font-awesome-rails
+
   haml
   jbuilder (~> 2.5)
   kaminari

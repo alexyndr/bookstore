@@ -21,6 +21,7 @@ group :development, :test do
   gem 'cancan'
   gem 'ffaker'
   gem 'overcommit'
+  gem 'haml'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'shoulda-matchers'

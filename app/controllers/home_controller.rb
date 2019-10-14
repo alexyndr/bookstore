@@ -8,3 +8,4 @@ class HomeController < ApplicationController
     @book = books.all.sample
   end
 end
+
