@@ -8,3 +8,4 @@ class HomeController < ApplicationController
     @top_books = TopBooksQuery.call
   end
 end
+
