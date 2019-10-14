@@ -1,0 +1,37 @@
+%main.container
+  = render partial: "checkout/partials/header"
+  %h3.general-subtitle=t('checkout.shipping_method')
+  = simple_form_for @checkout.order, url: wizard_path, method: :put do |f|
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40=t('checkout.method')
+            %th
+              %span.in-grey-600=t('checkout.days')
+            %th
+              %span.in-grey-600=t('checkout.price')
+        %tbody
+          = f.collection_radio_buttons :delivery_id, @checkout.deliveries, :id, :name do |delivery|
+            %tr
+              %td
+                .form-group.radio.mt-0.mb-0
+                  = delivery.label(class: 'radio_label') do
+                    = delivery.radio_button(class: 'radio-input', hidden: 'true')
+                    %span.radio-icon
+                    %span.radio-text
+                      = delivery.object.name
+              %td
+                %span
+                  = delivery.object.shipping_time
+              %td
+                %span.font-16.in-gold-500
+                  = price_euro(delivery.object.price)
+      #payment_centred
+        .general-text-align
+          %p.in-gold-500.font-18=t('checkout.order_summary')
+          %table.general-summary-table
+            = render "checkout/partials/total_price"
+        .text-center
+          = f.button :submit, t('checkout.save_and_continue'), class: 'btn btn-default mb-20'

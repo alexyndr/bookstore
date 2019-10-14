@@ -1,0 +1,15 @@
+%main.container.general-main-wrap
+  = render partial: "checkout/partials/header"
+  .text-center.mb-40
+    %h3.general-subtitle=t('checkout.thank_you')
+    %p.fw-300= "#{t('checkout.order_confirmation')} #{current_user.email}"
+    .general-text-right
+      %p.general-order-number.mb-0= "#{t('checkout.order')} #{@checkout.order.number}"
+      %p.general-address.mb-30= @checkout.order.compleated_at.strftime("%B %d, %Y")
+  = render "checkout/partials/table_for_books"
+  .text-center.general-text-right
+    %p.in-gold-500.font-18=t('checkout.order_summary')
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render "checkout/partials/total_price"
+  .text-center
+    = link_to(t('checkout.back_to_store'), root_path, html_options = {class: "btn btn-default mb-20"})

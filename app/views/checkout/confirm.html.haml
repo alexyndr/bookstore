@@ -1,0 +1,15 @@
+%main.container.general-main-wrap
+  = render partial: "checkout/partials/header"
+  .row.mb-20
+    = render partial: "checkout/partials/confirm/address", locals: {type: 'billing', address: @checkout.address_billing}
+    = render partial: "checkout/partials/confirm/address", locals: {type: 'shipping', address: @checkout.address_shipping}
+    = render partial: "checkout/partials/confirm/delivery", locals: {delivery: @checkout.current_delivery}
+    = render partial: "checkout/partials/confirm/card", locals: {card: @checkout.card}
+  = render "checkout/partials/table_for_books"
+  .text-center.general-text-right
+    %p.in-gold-500.font-18=t('checkout.order_summary')
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render "checkout/partials/total_price"
+  .text-center
+    = simple_form_for @checkout.order, url: wizard_path, method: :put do |f|
+      = f.button :submit, t('checkout.place_order'), class: "btn btn-default mb-20"

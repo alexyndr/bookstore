@@ -1,0 +1,9 @@
+.col-sm-3
+  %h3.general-subtitle=t('checkout.payment_info')
+  %p.general-address
+    = card.number.to_s.gsub(/^.{12}/, '** ' * 3)
+    %span.general-edit
+      = link_to wizard_path(:payment) do
+        =t('checkout.edit')
+    %br
+    = card.valid_thru

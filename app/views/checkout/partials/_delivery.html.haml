@@ -1,0 +1,11 @@
+%tr
+  %td
+    .form-group.radio.mt-0.mb-0
+      %label.radio-label
+        %input.radio-input{type: "radio", hidden: "true"}
+        %span.radio-icon
+        %span.radio-text= delivery.name
+  %td
+    %span= delivery.shipping_time
+  %td
+    %span.font-16.in-gold-500= price_euro(delivery.price)

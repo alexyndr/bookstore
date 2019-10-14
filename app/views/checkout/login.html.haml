@@ -1,0 +1,25 @@
+%main.container
+  .row
+    .col-md-5.mb-40
+      .text-center
+        %h3.general-subtitle=t('checkout.returning_customer')
+        = render partial: 'devise/sessions/form', locals: {resource: User.new, resource_name: 'user'}
+    .col-md-5.col-md-offset-1.mb-60
+      .text-center
+        %h3.general-subtitle=t('checkout.new_customer')
+        =link_to user_facebook_omniauth_authorize_path, class: "general-login-icon", method: :post do
+          %i.fa.fa-facebook-official
+        %p.general-login-text=t('checkout.or')
+      = form_for(User.new, url: user_registration_path, html: {class: "general-form"}) do |f|
+        .mb-40
+          %p.mb-5=t('checkout.quick_register')
+          %p.general-info-text.font-12.mb-20=t('checkout.password_later')
+        #new_customer
+          .mb-30
+            = f.label :email, class: "control-label input-label"
+            = f.email_field :email, placeholder: t('checkout.enter_email'), class: "form-control"
+            - password = Devise.friendly_token
+            = f.hidden_field :password, value: password
+            = f.hidden_field :password_confirmation, value: password
+          .text-center
+            = f.submit t('checkout.continue_to_checkout'), class: 'button btn btn-default mb-20'

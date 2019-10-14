@@ -1,0 +1,29 @@
+%main.container
+  = render partial: "checkout/partials/header"
+  %h3.general-subtitle=t('checkout.card')
+  = simple_form_for @checkout.card, url: wizard_path, method: :put, validate: true, html: {class: "max-600 mb-80"} do |f|
+    .form-group
+      = f.label :number, t('checkout.card_number'), class: 'control-label input-label'
+      = f.text_field :number, class: 'form-control', placeholder: t('checkout.card_number'), required: true
+    .row
+      .col-sm-6
+        .form-group
+          = f.label :card_holder, t('checkout.name_on_card'), class: 'control-label input-label'
+          = f.text_field :card_holder, class: 'form-control', placeholder: t('checkout.name_on_card'), required: true
+      .col-sm-3
+        .form-group
+          = f.label :valid_thru, t('checkout.mm_yy'), class: 'control-label input-label'
+          = f.text_field :valid_thru, class: 'form-control', placeholder: t('checkout.mm_yy'), required: true
+      .col-sm-3
+        .form-group.relative
+          = f.label :cvv, t('checkout.cvv'), class: 'control-label input-label'
+          = f.text_field :cvv, class: 'form-control', placeholder: t('checkout.cvv'), required: true
+          %i.fa.fa-question-circle.general-form-help{ 'data-toggle': 'tooltip', 'data-placement': :top, title: t('checkout.enter_cvv_here') }
+    #payment_centred
+      .general-text-align
+        %p.in-gold-500.font-18=t('checkout.order_summary')
+        %table.general-summary-table
+          = render "checkout/partials/total_price"
+      #payment_button
+        .text-center
+          = f.button :submit, t('checkout.save_and_continue'), class: 'btn btn-default mb-20'

@@ -1,0 +1,3 @@
+= simple_form_for @address_billing, as: :address, url: settings_addresses_path, method: :patch  do |form|
+  = form.hidden_field :address_type, value: 'billing'
+  = render 'form', f: form

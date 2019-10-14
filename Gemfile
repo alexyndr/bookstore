@@ -1,54 +1,66 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0.rc1'
-# Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
-# Use Puma as the app server
-gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
-# Reduces boot times through caching; required in config/boot.rb
+gem 'aws-sdk-s3', require: false
+gem 'activeadmin'
+gem 'activeadmin_addons'
+gem 'active_storage_validations'
+gem 'aasm'
 gem 'bootsnap', '>= 1.4.2', require: false
-
-group :development, :test do
-  gem 'ffaker'
-  gem 'overcommit'
-  gem 'haml'
-  gem 'pry-byebug'
-  gem 'pry-rails'
-  gem 'shoulda-matchers'
-  gem 'reek'
-  gem 'rspec-rails'
-  gem "rspec_junit_formatter"
-  gem 'rubocop'
-  gem 'rubocop-rspec'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-end
+gem 'cancancan', '~> 2.0'
+gem 'country_select', '~> 4.0'
+gem 'devise'
+gem 'draper'
+gem 'ffaker'
+gem 'font-awesome-rails'
+gem 'omniauth-facebook'
+gem 'haml'
+gem 'jbuilder', '~> 2.5'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'puma', '~> 3.11'
+gem 'rails', '~> 6.0.0.rc1'
+gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
+gem 'turbolinks', '~> 5'
+gem 'rails-i18n'
+gem 'image_processing', '~> 1.2'
+gem 'nokogiri', '>= 1.10.4'
+gem 'pagy'
+gem 'webpacker', '~> 4.0'
+gem 'wicked'
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'web-console', '>= 3.3.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'overcommit'
+  gem 'reek'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'web-console', '>= 3.3.0'
+end
+
+group :development, :test do
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-byebug'
+  gem 'pry-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
+  gem 'simplecov'
+  gem 'shoulda-matchers'
+  gem 'rspec-rails', '~> 4.0.0.beta2'
+  gem 'rspec_junit_formatter'
+  gem 'rails-controller-testing'
 end

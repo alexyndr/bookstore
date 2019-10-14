@@ -1,0 +1,30 @@
+%main.container.general-main-wrap
+  %h1.mt-0.mb-25=t('orders.my_order')
+  %p.lead.small.mb-10.visible-xs=t('orders.sort_by')
+  .dropdowns.dropdown.general-order-dropdown#dropdown
+    %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      =t('orders.waiting')
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      %li
+        = link_to t('orders.all'), orders_path, class: 'all'
+      %li
+        = link_to t('orders.in_delivery'), orders_path(status: :in_delivery), class: 'in_delivery'
+      %li
+        = link_to t('orders.delivered'), orders_path(status: :delivered), class: 'delivered'
+      %li
+        = link_to t('orders.canceled'), orders_path(status: :canceled), class: 'canceled'
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600=t('orders.number')
+          %th
+            %span.in-grey-600=t('orders.completed_at')
+          %th
+            %span.in-grey-600=t('orders.status')
+          %th
+            %span.in-grey-600=t('orders.total')
+      %tbody
+        = render partial: 'order', collection: @orders, as: :order

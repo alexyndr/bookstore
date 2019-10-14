@@ -1,0 +1,9 @@
+%h1.general-title-margin= t('cart.checkout')
+%ul.steps.list-inline
+  - wizard_steps.drop(1).each_with_index do |one_of_step, index| 
+    %li{class: "step #{'active' if one_of_step == step || past_step?(one_of_step)}"}
+      = link_to wizard_path(one_of_step) do
+        %span.step-number= index + 1
+        %span.step-text.hidden-xs= one_of_step.capitalize
+    - if one_of_step != :complete 
+      %li.step-divider

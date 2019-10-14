@@ -1,0 +1,7 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title=t('devise.log_in')
+    = render partial: 'form'
+    %p.general-sign-text.text-center
+      =t('devise.dont_have_account')
+      %a.in-gold-500{href: "/users/sign_up"}=t('devise.sign_up')

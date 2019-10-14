@@ -1,0 +1,16 @@
+- @newest.each_with_index do |book, index|
+  .carousel-item{class: "#{index == 0 ? 'active' : ''}"}
+    .row#ddfde
+      .col-sm-5
+        .general-img-wrap
+          = image_tag book.covers.first.variant(resize: "250x250").processed, class: "img-shadow general-thumbnail-img"
+      .col-sm-7
+        .mb-60
+          %h1= book.title
+          %p.lead= book.description
+          %p.lead.small
+            - book.authors.each do |author|
+              = author.name
+          .general-align
+            = link_to order_items_path(order_item: { book_id: book.id, quantity: 1 }), method: :post do
+              %button.btn.btn-primary=t('home_page.buy_now')

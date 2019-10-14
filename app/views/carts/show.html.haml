@@ -1,0 +1,49 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin=t('cart.cart')
+  - unless @order_items.empty?
+    .books
+      .hidden-xs
+        %table.table.table-hover
+          %tr.no-hover
+            %th.col-pic.pl-0
+              %span.in-grey-600=t('cart.product')
+            %th.col-title
+            %th.col-price
+              %span.in-grey-600=t('cart.price')
+            %th.col-quantity
+              %span.in-grey-600=t('cart.quantity')
+            %th.col-total
+              %span.in-grey-600=t('cart.subtotal')
+            %th.col-close
+          = render partial: 'cart_book', collection: @order_items, as: :order_item
+      .general-order-wrap
+        .row
+          .col-sm-4
+            = form_with url: cart_path, local: true, method: :patch  do |form|
+              = form.label :code, t('cart.enter_coupon'), class: "input-label"
+              = form.text_field :code, placeholder: t('cart.enter_coupon_code'), class: "form-control mb-30"
+              %div
+                = form.submit t('cart.apply_coupon'), class: "btn btn-primary mr-5 mb-15"
+          .col-sm-8
+            .res-mr-200.general-text-right
+              %p.in-gold-500.font-18=t('cart.order_summary')
+              %table.general-summary-table.general-summary-table-right.general-text-right
+                %tr
+                  %td
+                    %p.font-16=t('cart.subtotal')
+                  %td
+                    %p.font-16= price_euro(@subtotal_price_sum)
+                %tr
+                  %td
+                    %p.font-16=t('cart.coupon')
+                  %td
+                    %p.font-16= price_euro(@discount)
+                %tr
+                  %td
+                    %strong.font-18=t('cart.order_total')
+                  %td
+                    %strong.font-18= price_euro(@item_total_price)
+      .text-center
+        = link_to t('cart.checkout'), checkout_path(:login), class: "btn btn-default mb-20"
+  - else
+    %h2.general-title-margin.in-gold-500=t('cart.sorry')

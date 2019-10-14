@@ -1,0 +1,42 @@
+%main.container
+  %a.general-back-link{href: "/books"}
+    %i.fa.fa-long-arrow-left.mr-15
+    =t('book_pages.back_to_result')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          = image_tag @book.covers.first.variant(resize: "250x250").processed, class: "img-responsive"
+        .images.clearfix
+          - @book.covers.each do |cover|
+            %a.img-link{href: "#"}
+              = image_tag cover.variant(resize: '50x50').processed
+    .col-sm-6
+      %h1.mt-res-0= @book.title
+      %p.lead.small= @book.authors.map(&:name).join
+      .row
+        = render 'order_items/form'
+      .general-info-wrap.divider-lg
+        %p=t('book_pages.description')
+        .show-more
+          %p.lead.small.line-height-2.show-read-more 
+            = @book.description
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left=t('book_pages.year')
+          %p.lead.small.pull-right= @book.publication_year
+      .general-info-wrap.divider-lg
+        .clearfix#show
+          %p.pull-left=t('book_pages.dimension')
+          %p.lead.small.pull-right= "H: #{@book.height}\" x W: #{@book.width}\" x D: #{@book.depth}\""
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left=t('book_pages.material')
+          %p.lead.small.pull-right= @book.materials
+  .mb-80
+    %h3.in-gold-500.mb-25=t('book_pages.reviews') + " (#{ @reviews.approved.count})"
+    = render @reviews.approved
+  - if user_signed_in?
+    .mb-80
+      %h3=t('book_pages.review')
+      = render 'reviews/form'

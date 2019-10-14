@@ -6,10 +6,10 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
+          NODE_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
       - image: circleci/postgres:11-alpine
@@ -22,10 +22,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: linters
-          command: overcommit --run
   
       # Download and cache dependencies
       - restore_cache:
@@ -38,6 +34,7 @@ jobs:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install
 
       - save_cache:
           paths:
@@ -51,10 +48,16 @@ jobs:
             bundle exec rake db:schema:load
 
       - run:
+          name: Running overcommit
+          command: |
+            bundle exec overcommit -s
+            SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
+
+      - run:
           name: run tests
           command: |
-            bundle exec rspec \
-              --format RspecJunitFormatter \
+            bundle exec rspec --format RspecJunitFormatter
+
 
       # collect reports
       - store_test_results:

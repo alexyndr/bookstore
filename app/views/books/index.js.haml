@@ -1,0 +1,4 @@
+:plain
+  $('#books').append("#{ j(render 'book')}");
+  $('#div_next_link').html("#{j(render 'next_link')}");
+  if (!$('#next_link').length) { $('#div_next_link').remove(); }

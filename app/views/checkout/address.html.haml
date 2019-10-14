@@ -1,0 +1,32 @@
+%main.container
+  = render partial: "checkout/partials/header"
+  %form.res-mb-100
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle=t('addresses.billing_address')
+          %p.general-info-text=t('checkout.all_fields')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle=t('addresses.shipping_address')
+  = simple_form_for @checkout, as: :address, url: wizard_path, validate: true, method: :patch do |f|
+    .row
+      .col-md-5.mb-40
+        = f.simple_fields_for :billing, @checkout.address_billing do |form|
+          = render partial: "checkout/partials/address_form", locals: {f: form}
+      #billing-form
+        .col-md-5.col-md-offset-1.mb-60
+          = f.simple_fields_for :shipping, @checkout.address_shipping do |form|
+            = render partial: "checkout/partials/address_form", locals: {f: form}
+          .form-group.checkbox
+            %label.checkbox-label
+              = check_box_tag :use_billing, true, false, id: 'use_billing', class: 'checkbox-input', hidden: true
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text
+                =t('checkout.use_billing')
+    .general-text-align.mb-60
+      %p.in-gold-500.font-18=t('checkout.order_summary')
+      %table.general-summary-table
+        = render "checkout/partials/total_price"
+      .text-center
+        = f.button :submit, t('checkout.save_and_continue'), class: 'btn btn-default mb-20'

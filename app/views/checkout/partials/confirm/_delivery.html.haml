@@ -1,0 +1,9 @@
+.col-sm-3
+  %h3.general-subtitle=t('checkout.shipments')
+  %p.general-address
+    = "#{t('checkout.delivered')} #{delivery.shipping_time}"
+    %span.general-edit
+      = link_to wizard_path(:address) do
+        =t('checkout.edit')
+    %br
+    = delivery.name
