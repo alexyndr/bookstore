@@ -34,6 +34,7 @@ gem 'nokogiri', '>= 1.10.4'
 gem 'pagy'
 gem 'webpacker', '~> 4.0'
 gem 'wicked'
+gem "omniauth-rails_csrf_protection"
 
 group :development do
   gem 'letter_opener'
