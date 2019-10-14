@@ -12,7 +12,7 @@ describe 'Book page', type: :feature do
   end
 
   it 'Add to cart' do
-    click_button('Add to Cart')
+    click_button(I18n.t('book_pages.add_to_cart'))
     expect(find('.hidden-xs .shop-quantity').text).to eq('1')
   end
 
@@ -21,7 +21,7 @@ describe 'Book page', type: :feature do
   end
 
   it 'book page' do
-    expect(page).to have_content('Description')
+    expect(page).to have_content(I18n.t('book_pages.description'))
   end
 
   it 'write a review' do
@@ -30,11 +30,11 @@ describe 'Book page', type: :feature do
     fill_in I18n.t('book_pages.review'), with: I18n.t('book_pages.review')
     click_button I18n.t('book_pages.post')
 
-    expect(page).to have_content 'Thanks for Review'
+    expect(page).to have_content I18n.t('book_pages.review')
   end
 
   it 'send comment with invalid fields' do
-    click_on('Post')
-    expect(page).to have_content("Title can't be blank, Text can't be blank, Score can't be blank, Score is not a number")
+    click_on(I18n.t('book_pages.post'))
+    expect(page).to have_content(I18n.t('book_pages.error'))
   end
 end

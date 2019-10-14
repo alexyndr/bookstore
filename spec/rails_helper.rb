@@ -25,7 +25,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-Capybara.default_driver = :selenium_chrome
+Capybara.default_driver = :selenium_chrome_headless
 # Capybara.ignore_hidden_elements = true
 
 RSpec.configure do |config|

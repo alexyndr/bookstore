@@ -46,7 +46,7 @@ class Checkout::ShowManagerService
   private
 
   def set_credit_card
-    @card ||= @order.card || Card.new
+    @set_credit_card ||= @order.card || Card.new
   end
 
   def set_billing_address

@@ -2,8 +2,7 @@
 
 class OrdersController < ApplicationController
   def index
-    @orders = current_user.orders.order_not_in_progress
-    @orders = FilterStatusesQuery.call(@orders, status_params) if status_params
+    @orders = FilterStatusesQuery.call(current_user, status_params)
   end
 
   private

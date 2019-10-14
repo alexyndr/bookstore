@@ -25,6 +25,7 @@ en:
     phone_num: "(555)-555-5555"
     buy_now: "Buy Now"
   book_pages:
+    review: "Thanks for Review. It will be published as soon as Admin will approve it"
     add_to_cart: "Add to Cart"
     back_to_result: "Back to results"
     reviews: "Reviews"
@@ -47,11 +48,15 @@ en:
     low_to_hight: "Price: Low to Hight"
     popular: "Popular"
     all: "All"
+    error: "Title can't be blank, Text can't be blank, Score can't be blank, Score is not a number"
+    blank: "can't be blank"
   devise:
     dont_have_account: "Don’t have an Account?"
     do_have_account: "Do you have an Account?"
     forgot_pass: "Forgot password?"
     remember_me: "Remember me"
+    email_changed: "Email changed"
+    pass_changed: "Password changed"
     sign_in: "Sign In"
     sign_up: "Sign Up"
     log_out: "Log out"
@@ -66,6 +71,8 @@ en:
     type_new_pass: "Type a new Password"
     set_new_pass: "Set new password"
     char_min: "characters minimum"
+    error_massage: "Invalid Email or password."
+    my_account: "My account"
     confirmation_link: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account"
   addresses:
     settings: "Settings"
@@ -86,6 +93,8 @@ en:
     remove_account: "Remove Account"
     please_remove_account: "Please Remove My Account"
     i_understand: "I understand that all data will be lost"
+    blank_email: "Email can't be blank and Email invalid format"
+    blank_password: "Current password can't be blank"
   orders:
     my_order: "My Orders"
     sort_by: "Sort by"

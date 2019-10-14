@@ -7,22 +7,49 @@ Metrics/CyclomaticComplexity:
   Max: 10
 
 Metrics/AbcSize:
-  Max: 20
-
-Metrics/MethodLength:
-  Max: 10
-
-Metrics/BlockLength:
-  Max: 50
+  Max: 24
 
 Metrics/ClassLength:
   Max: 100
 
-Style/Documentation:
-  Enabled: false
+Metrics/BlockLength:
+  Max: 70
+
+Metrics/MethodLength:
+  Max: 10
+  Exclude:
+    - "app/models/ability.rb"
 
 RSpec/MultipleExpectations:
   Max: 2
+  Exclude:
+    - "**/checkout_page_spec.rb"
+
+Lint/AssignmentInCondition:
+  Exclude:
+    - "app/models/user.rb"
+
+RSpec/NamedSubject:
+  Exclude:
+    - "**/checkout_controller_spec.rb"
+
+RSpec/LeakyConstantDeclaration:
+  Exclude:
+    - "**/checkout_controller_spec.rb"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "**/settings_page_spec.rb"
+    - "**/checkout_page_spec.rb"
+
+RSpec/LetSetup:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
 
 AllCops:
   Exclude:

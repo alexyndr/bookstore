@@ -58,7 +58,6 @@ describe 'Cart page', type: :feature do
     end
 
     it 'click checkout' do
-      # click_button I18n.t('cart.checkout')
       find('.text-center').find('.btn-default').click
       expect(page).to have_current_path checkout_path(:address)
     end

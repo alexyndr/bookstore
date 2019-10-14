@@ -16,12 +16,12 @@ describe 'Settings page', type: :feature do
 
     it 'when go to settings page' do
       expect(page).to have_current_path settings_addresses_path
-      expect(page).to have_content('Settings')
+      expect(page).to have_content I18n.t('header_footer.settings')
     end
 
     it 'when empty fields' do
       first('input[type=submit]').click
-      expect(page).to have_content "can't be blank"
+      expect(page).to have_content I18n.t('book_pages.blank')
     end
 
     it 'billing address exists' do

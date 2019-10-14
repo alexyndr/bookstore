@@ -1,18 +1,32 @@
 detectors:
   IrresponsibleModule:
-      enabled: false
-      exclude: []
+    enabled: false
+
   TooManyInstanceVariables:
-      max_instance_variables: 8
+    max_instance_variables: 8
+
   TooManyStatements:
-    enabled: true
-    exclude:
-    - initialize
     max_statements: 7
+
   DuplicateMethodCall:
-    max_calls: 2
+    enabled: false
+    
   InstanceVariableAssumption:
+    enabled: false
+
+  ControlParameter:
+    enabled: false
+
+  NilCheck:
+    enabled: false
+
+directories:
+  "app/models":
+    Attribute:
       enabled: false
+    FeatureEnvy:
+      enabled: false
+
 exclude_paths:
   - app/channels/
   - config/

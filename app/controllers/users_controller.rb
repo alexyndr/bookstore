@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def update_password
     if @user.update_with_password(user_params_password)
       redirect_to root_path
-      flash[:success] = 'Password changed'
+      flash[:success] = t('devise.pass_changed')
     else
       flash[:warning] = @user.errors.full_messages.to_sentence
       render :edit
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def update_email
     @user.skip_reconfirmation!
     if @user.update_without_password(user_params_email)
-      flash[:success] = 'Email changed'
+      flash[:success] = t('devise.email_changed')
     else
       flash[:warning] = @user.errors.full_messages.to_sentence
     end

@@ -40,7 +40,7 @@ ActiveAdmin.register Order do
 
       # use the attr_accessor to pass the data
       f.input :active_admin_requested_event, label: t('admin.change_state'), as: :radio, collection:
-        f.object.aasm.events(reject: %i[in_progress completed in_delivery]).map(&:name)
+        f.object.aasm.events(reject: %i[in_progress completed]).map(&:name)
     end
     f.actions
   end

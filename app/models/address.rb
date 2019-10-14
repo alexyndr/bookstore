@@ -27,7 +27,7 @@ class Address < ApplicationRecord
             length: { maximum: 15 }
 
   def country_name
-    c = ISO3166::Country[country]
-    c.translations[I18n.locale.to_s] || c.name
+    code_country = ISO3166::Country[country]
+    code_country.translations[I18n.locale.to_s] || code_country.name
   end
 end

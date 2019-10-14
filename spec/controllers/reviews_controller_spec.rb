@@ -23,7 +23,7 @@ RSpec.describe ReviewsController, type: :controller do
       end
 
       it 'sends success flash' do
-        expect(flash[:success]).to eq 'Thanks for Review. It will be published as soon as Admin will approve it.'
+        expect(flash[:success]).to eq I18n.t('book_pages.review')
       end
     end
 

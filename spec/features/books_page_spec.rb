@@ -17,6 +17,6 @@ describe 'Books page', type: :feature do
   end
 
   it 'books page' do
-    expect(page).to have_content('Newest first')
+    expect(page).to have_content(I18n.t('book_pages.newest_first'))
   end
 end

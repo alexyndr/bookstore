@@ -16,8 +16,8 @@ RSpec.describe CheckoutController, type: :controller do
       STEPS.each do |step|
         it "#{step.capitalize} step" do
           get :show, params: { id: step }
-          expect(page).to respond_with(200)
-          expect(page).to render_template step.to_s
+          expect(subject).to respond_with(200)
+          expect(subject).to render_template step.to_s
         end
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe CheckoutController, type: :controller do
         get :show, params: { id: STEPS[0] }
       end
 
-      it { expect(page).to respond_with(302) }
+      it { expect(subject).to respond_with(302) }
     end
   end
 

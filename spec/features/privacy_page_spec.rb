@@ -18,13 +18,13 @@ describe 'Privacy page', type: :feature do
     it 'when empty field' do
       fill_in 'user[email]', with: ''
       click_on(id: 'email_btn')
-      expect(page).to have_content("Email can't be blank and Email invalid format")
+      expect(page).to have_content I18n.t('addresses.blank_email')
     end
 
     it 'when successful change email' do
       fill_in 'user[email]', with: new_email
       click_on(id: 'email_btn')
-      expect(page).to have_content('Email changed')
+      expect(page).to have_content I18n.t('devise.email_changed')
     end
   end
 
@@ -36,7 +36,7 @@ describe 'Privacy page', type: :feature do
       fill_in 'user[password]', with: ''
       fill_in 'user[password_confirmation]', with: ''
       click_on(id: 'pass_btn')
-      expect(page).to have_content("Current password can't be blank")
+      expect(page).to have_content I18n.t('addresses.blank_password')
     end
 
     it 'when successful change password' do
@@ -52,8 +52,6 @@ describe 'Privacy page', type: :feature do
     it 'checked delete account' do
       find('span', class: 'checkbox-icon').set(true)
       find('#destroy_confirmation_button').click
-      # click_button('Please Remove My Account')
-      # click_on(id: 'destroy_confirmation_button')
       expect(page).to have_current_path root_path
     end
   end

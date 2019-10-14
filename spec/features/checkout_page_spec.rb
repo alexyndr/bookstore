@@ -37,7 +37,6 @@ describe 'Checkout page', type: :feature do
         select(address_params[:country], from: "address[#{type}][country]")
         fill_in "address[#{type}][phone_number]", with: address_params[:phone_number]
       end
-      # check('use_billing') # selenium dont see hiden elements
       click_button(I18n.t('checkout.save_and_continue'))
     end
 

@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review = book.reviews.build(review_params.merge(user_id: current_user.id))
 
     if @review.save
-      flash[:success] = 'Thanks for Review. It will be published as soon as Admin will approve it.'
+      flash[:success] = t('book_pages.review')
     else
       flash[:error] = @review.errors.full_messages.join(', ')
     end

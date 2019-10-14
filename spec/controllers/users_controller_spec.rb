@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'flash success' do
-      expect(flash[:success]).to eq 'Email changed'
+      expect(flash[:success]).to eq I18n.t('devise.email_changed')
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'flash success' do
-      expect(flash[:success]).to eq 'Password changed'
+      expect(flash[:success]).to eq I18n.t('devise.pass_changed')
     end
   end
 end

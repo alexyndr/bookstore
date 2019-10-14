@@ -17,6 +17,6 @@ describe 'Home page', type: :feature do
   end
 
   it 'home page' do
-    expect(page).to have_content('Welcome to our amazing Bookstore!')
+    expect(page).to have_content(I18n.t('home_page.welcome'))
   end
 end
