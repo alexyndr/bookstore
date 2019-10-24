@@ -144,7 +144,6 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
-    database_cleaner (1.7.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.1)
@@ -494,7 +493,6 @@ DEPENDENCIES
   cancancan (~> 2.0)
   capybara
   country_select (~> 4.0)
-  database_cleaner
   devise
   dotenv-rails
   draper
