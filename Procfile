@@ -1,3 +1,2 @@
-release: bundle exec rake webpack:compile && rails db:migrate
+release: bundle exec rails db:migrate
 web: bundle exec rails s
-
