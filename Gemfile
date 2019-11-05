@@ -32,7 +32,7 @@ gem 'rails-i18n'
 gem 'image_processing', '~> 1.2'
 gem 'nokogiri', '>= 1.10.4'
 gem 'pagy'
-gem 'webpacker', '~> 4.0'
+gem 'webpacker'
 gem 'wicked'
 gem "omniauth-rails_csrf_protection"
 
