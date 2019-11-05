@@ -12,13 +12,9 @@ test:
   <<: *default
   database: bookstore_test
 
-# You can use this database configuration with:
-#
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-
 production:
   <<: *default
+  host: localhost
   database: bookstore_production
-  username: bookstore
+  username: <%= ENV['BOOKSTORE_NAME'] %>
   password: <%= ENV['BOOKSTORE_DATABASE_PASSWORD'] %>
