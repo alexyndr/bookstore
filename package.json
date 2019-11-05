@@ -1,6 +1,10 @@
 {
   "name": "bookstore",
   "private": true,
+  "scripts": {
+    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
+    "heroku-postbuild": "npm run webpack:deploy"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/actiontext": "^6.0.0-rc2",
