@@ -1,0 +1,301 @@
+What is Capybara?
+DSL extensions for testing web-based UIs
+- HTML elements and attributes
+- CSS classes
+- Javascript calls
+
+-------------------------------------------
+
+Why Capybara Gem?
+- Commands
+  - visit
+  - click
+  - within
+  - fill_in, with
+  - choose
+  - check
+  - find
+  - etc.
+- Matchers
+  - have_selector
+  - have_content
+  - have_no_content
+  - have_xpath
+  - have_css
+  - etc.
+- Complexities working with Javascript
+  - different web drivers for different tasks
+- Debugging
+  - save_and_open_page
+  - save_and_open_screenshot
+
+-------------------------------------------
+
+Capybara provide aliases (to make the specs more expressive)
+- feature (Instead of describe or context)
+- scenario (it)
+- background (before)
+- given/given! (let/let!)
+
+-------------------------------------------
+
+Web drivers
+- Non JS support
+  - RackTest (out from box, using in API testing)
+- With JS support
+  - Selenium-Webdriver
+  - Poltergeist or Cuprite
+
+-------------------------------------------
+
+Setup Capybara
+
+Gemfile
+  gem 'rspec-rails'
+  gem 'capybara'
+
+$ bundle
+
+rails_helper.rb
+   # ./spec/features/mainpage_spec.rb:4
+  require 'capybara/rails'
+
+$ rails g rspec:feature mainpage
+create spec/features/mainpage_spec.rb
+
+-------------------------------------------
+
+mainpage_spec.rb
+  require 'rails_helper'
+
+  RSpec.feature "Mainpages", type: :feature do
+    pending "add some scenarios (or delete) #{__FILE__}"
+  end
+
+$ bundle exec rspec --tag type:feature
+  1) Mainpages add some scenarios (or delete) /home/dell/Documents/bookstore/spec/features/mainpage_spec.rb
+     # Not yet implemented
+     # ./spec/features/mainpage_spec.rb:4
+
+-------------------------------------------
+
+Lets write some simple feature test!
+
+/mainpage_spec.rb
+
+RSpec.feature "Mainpages", type: :feature do
+  feature "when the main page is accessed" do
+    background do
+      visit "/"
+    end
+    scenario "display the index.html page" do
+      expect(page).to have_content("Hello word")
+    end
+    scenario "index page has bootstrap styles" do
+      expect(page).to have_css("div.container")
+    end
+  end
+end
+
+Capybara starting Puma...
+* Version 3.12.1 , codename: Llamas in Pajamas
+* Min threads: 0, max threads: 4
+* Listening on tcp://127.0.0.1:37869
+
+Mainpages
+  when the main page is accessed
+    display the index.html page
+    index page has bootstrap styles
+
+Finished in 1.13 seconds (files took 1.77 seconds to load)
+2 examples, 0 failures
+
+-------------------------------------------
+
+Lets add instance variable (given/given!) for a new feature test!
+
+rails g rspec:feature userpage
+
+/userpage_spec.rb
+
+RSpec.feature "Userpages", type: :feature do
+  feature "when the main page is accessed" do
+    given!(:current_user) { create(:user) }
+
+    background do
+      visit "/user"
+    end
+    scenario "display the index.html page" do
+      expect(page).to have_content("Hello word")
+    end
+    scenario "index page has bootstrap styles" do
+      expect(page).to have_css("div.container")
+    end
+  end
+end
+
+In this case we used FactoryBot with factory user for creation current_user
+We must create variable current_user before we visit "/user" URI
+Otherwise, the test will fail, because the variable current_user will be equal Nil.
+
+let/given - define memoized helper method
+let!/given! - define a memoized helper method that is called in a before hook
+
+-------------------------------------------
+
+Drivers
+
+If you'd prefer to run every feature test in Selenium, you could do:
+
+Gemfile
+  gem 'selenium-webdriver'
+
+$ bundle
+
+rails_helper.rb
+  Capybara.default_driver = :selenium # :selenium_chrome and :selenium_chrome_headless are also registered
+
+Or you can marking only those tests that require a JavaScript-capable driver using js: true 
+or @javascript (for capybara).
+
+Use js: true to switch to the Capybara.javascript_driver (:selenium by default), or provide a :driver option to 
+switch to one specific driver. For example:
+
+describe 'some stuff which requires js', js: true do
+  it 'will use the default js driver'
+  it 'will switch to one specific driver', driver: :apparition
+end
+
+Also You can switch to the Capybara.javascript_driver (:selenium by default)
+by tagging scenarios (or features) with @javascript:
+
+@javascript
+Scenario: do something Ajaxy
+ When I click the Ajax link
+ ...
+
+-------------------------------------------
+
+Using Page Object Pattern
+
+Take a look at code in rspec without using Page Object Pattern.
+
+spec/features/new_post_spec.rb
+
+  it "can create posts" do
+    login_as(user, :scope => :user)
+
+    visit new_post_path
+    within("#new_post") do
+      fill_in 'post_title', with: "My super Blog title"
+      fill_in 'post_input_content', with: "##loren loren\n ipsum ipsum"
+    end
+    click_button 'Publish'
+    expect(page).to have_content 'Post was successfully created'
+  end
+
+Lets write Page Object!
+
+mkdir spec/support
+touch spec/support/new_post_form.rb
+
+new_post_form.rb
+
+class NewPostForm
+  include Capybara::DSL  # Capybara
+  include FactoryBot::Syntax::Methods  # FactoryBot
+  include Warden::Test::Helpers  # Devise
+  include Rails.application.routes.url_helpers  # Routes
+
+  def login(user)
+    login_as(user, :scope => :user)
+    self
+  end
+
+  def visit_page
+    visit new_post_path
+    self
+  end
+
+  def fill_in_with(params={})
+    within("#new_post") do
+      fill_in 'post_title', with: params.fetch(:post_title)
+      fill_in 'post_input_content', with: params.fetch(:post_input_content)
+    end
+
+    self
+  end
+
+  def submit
+    click_button 'Publish'
+  end
+end
+
+Final code after refactored to use PO pattern.
+
+new_post_spec.rb
+
+it "can create posts - page object pattern" do
+  new_post_form = NewPostForm.new
+  new_post_form.login(user).visit_page.fill_in_with(
+    post_title: "My super Blog title",
+    post_input_content: "##loren loren\n ipsum ipsum"
+  ).submit
+
+  expect(page).to have_content 'Post was successfully created'
+end
+
+-------------------------------------------
+
+Cucumber
+
+Cucumber is a BDD tool that expresses human-readable tests that are mapped into code.
+
+Gemfile
+  gem 'cucumber-rails'
+
+$ bundle
+
+cucumber --init
+  create   features
+  create   features/step_definitions
+  create   features/support
+  create   features/support/env.rb
+
+Lets create first feature cucumber test!
+
+features/support/welcome.feature
+
+Feature: Visit Homepage
+  User want to see Profile tab
+  
+  Scenario: User login on Homepage
+    Given I am on home page
+    Then I fill in "Email" with "email"
+    Then Also I fill in "Password" with "password"
+    When I click the "Sign In"
+    Then I should see the title "Profile" 
+
+And add step_definitions for our cucumber test.
+
+features/step_definitions/welcome_steps.rb
+
+Given("I am on home page") do
+  visit "/"
+end
+
+Then("I fill in {string} with {string}") do |string, string2|
+  fill_in(string, with: string2)
+end
+
+Then("Also I fill in {string} with {string}") do |string, string2|
+  fill_in(string, with: string2)
+end
+
+When("I click the {string}") do |string|
+  click_button(string)
+end
+
+Then("I should see the title {string}") do |string|
+  find_field(string).value
+end
