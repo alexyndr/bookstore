@@ -14,7 +14,7 @@ describe 'Sign up', type: :feature do
     fill_in 'user[password]', with: attributes[:password]
     fill_in 'user[password_confirmation]', with: attributes[:password]
     click_button(I18n.t('devise.sign_up'))
-    expect(page).to have_content I18n.t('book_pages.blank')
+    expect(page).to have_current_path user_registration_path
   end
 
   it 'when click sign_up with full fields' do

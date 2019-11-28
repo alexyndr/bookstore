@@ -25,7 +25,6 @@ describe 'Cart page', type: :feature do
     end
 
     it 'plus book' do
-      find_button('.btn')
       find('.fa-plus').click
       expect(find_field('order_item[quantity]').value).to eq '2'
     end
