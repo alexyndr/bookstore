@@ -5,10 +5,10 @@ require 'rails_helper'
 describe 'Cart page', type: :feature do
   let(:user) { create(:user) }
 
-  before { login_as(user, scope: :user) }
+  new_cart = CartPageObject.new
 
   it 'empty cart' do
-    visit cart_path
+    new_cart.visit_page
 
     expect(page).to have_content I18n.t('cart.sorry')
   end
@@ -17,59 +17,52 @@ describe 'Cart page', type: :feature do
     let(:order) { create(:order, user: user) }
     let!(:cart_item) { create(:order_item, order: order) }
     let(:coupon) { create(:coupon, active: true) }
+    let(:wrong_code) { '2222' }
 
-    before { visit cart_path }
+    before { new_cart.login(user).visit_page }
 
     it 'full cart' do
       expect(page).not_to have_content I18n.t('cart.sorry')
     end
 
     it 'plus book' do
-      find_button('.btn')
-      find('.fa-plus').click
-      expect(find_field('order_item[quantity]').value).to eq '2'
+      3.times { new_cart.plus_one_book }
+      expect(find_field('order_item[quantity]').value).to eq '4'
     end
 
     it 'minus book' do
-      4.times { find('.fa-plus').click }
-      2.times { find('.fa-minus').click }
+      3.times { new_cart.plus_one_book }
+      new_cart.minus_one_book
       expect(find_field('order_item[quantity]').value).to eq '3'
     end
 
-    it 'click link' do
-      click_link(cart_item.book.title)
-      expect(page).to have_content I18n.t('book_pages.reviews')
-    end
-
     it 'click to cover' do
-      find('.general-img-wrap-table').find('a').click
+      new_cart.click_cover
       expect(page).to have_content I18n.t('book_pages.reviews')
     end
 
     it 'click to title' do
-      find('.title').click
+      new_cart.click_title
       expect(page).to have_content I18n.t('book_pages.reviews')
     end
 
     it 'insert valid coupon' do
-      fill_in I18n.t('cart.enter_coupon_code'), with: coupon.code
-      click_button I18n.t('cart.apply_coupon')
+      new_cart.insert_coupon(coupon.code).apply_coupon
       expect(page).not_to have_content I18n.t('cart.discount')
     end
 
     it 'insert invalid coupon' do
-      fill_in I18n.t('cart.enter_coupon_code'), with: ''
-      click_button I18n.t('cart.apply_coupon')
+      new_cart.insert_coupon(wrong_code).apply_coupon
       expect(page).to have_content I18n.t('cart.discount')
     end
 
     it 'click checkout' do
-      find('.text-center').find('.btn-default').click
+      new_cart.checkout_click
       expect(page).to have_current_path checkout_path(:address)
     end
 
     it 'delete book' do
-      find('.general-cart-close').click
+      new_cart.delete_book
       expect(page).to have_content I18n.t('cart.sorry')
     end
   end
