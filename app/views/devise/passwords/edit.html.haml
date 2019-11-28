@@ -2,7 +2,6 @@
   .text-center
     %h3.general-login-title=t('devise.set_new_pass')
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "general-form", method: :put }) do |f|
-    = devise_error_messages!
     = f.hidden_field :reset_password_token
     .form-group.mb-30
       = f.label :password, t('devise.type_new_pass'), class: "control-label input-label"
