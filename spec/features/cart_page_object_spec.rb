@@ -4,6 +4,9 @@ require 'rails_helper'
 
 describe 'Cart page', type: :feature do
   let(:user) { create(:user) }
+  let(:order) { create(:order, user: user) }
+  let(:coupon) { create(:coupon, active: true) }
+  let(:wrong_code) { '2222' }
 
   new_cart = CartPageObject.new
 
@@ -13,11 +16,8 @@ describe 'Cart page', type: :feature do
     expect(page).to have_content I18n.t('cart.sorry')
   end
 
-  context 'when full cart' do
-    let(:order) { create(:order, user: user) }
+  context 'when one book in cart' do
     let!(:cart_item) { create(:order_item, order: order) }
-    let(:coupon) { create(:coupon, active: true) }
-    let(:wrong_code) { '2222' }
 
     before { new_cart.login(user).visit_page }
 
@@ -26,44 +26,59 @@ describe 'Cart page', type: :feature do
     end
 
     it 'plus book' do
-      3.times { new_cart.plus_one_book }
-      expect(find_field('order_item[quantity]').value).to eq '4'
+      new_cart.plus_one_book
+      expect(new_cart.find_quantity.value).to eq '2'
     end
 
     it 'minus book' do
-      3.times { new_cart.plus_one_book }
+      new_cart.plus_one_book(3)
       new_cart.minus_one_book
-      expect(find_field('order_item[quantity]').value).to eq '3'
+      expect(new_cart.find_quantity.value).to eq '3'
     end
 
     it 'click to cover' do
-      new_cart.click_cover
-      expect(page).to have_content I18n.t('book_pages.reviews')
+      new_cart.find_cover.click
+      expect(new_cart).to have_content I18n.t('book_pages.reviews')
     end
 
     it 'click to title' do
-      new_cart.click_title
-      expect(page).to have_content I18n.t('book_pages.reviews')
+      new_cart.find_title.click
+      expect(new_cart).to have_content I18n.t('book_pages.reviews')
     end
 
     it 'insert valid coupon' do
-      new_cart.insert_coupon(coupon.code).apply_coupon
-      expect(page).not_to have_content I18n.t('cart.discount')
+      new_cart.apply_coupon(coupon.code)
+      expect(new_cart.find_discount.text).to have_content '15.00'
     end
 
     it 'insert invalid coupon' do
-      new_cart.insert_coupon(wrong_code).apply_coupon
-      expect(page).to have_content I18n.t('cart.discount')
+      new_cart.apply_coupon(wrong_code)
+      expect(new_cart.find_discount.text).not_to have_content '15.00'
     end
 
     it 'click checkout' do
       new_cart.checkout_click
-      expect(page).to have_current_path checkout_path(:address)
+      expect(new_cart).to have_current_path checkout_path(:address)
     end
 
     it 'delete book' do
-      new_cart.delete_book
-      expect(page).to have_content I18n.t('cart.sorry')
+      new_cart.delete_book.click
+      expect(new_cart).to have_content I18n.t('cart.sorry')
+    end
+  end
+
+  context 'when three books in cart' do
+    let!(:cart_items) { create_list(:order_item, 3, order: order) }
+
+    before { new_cart.login(user).visit_page }
+
+    it 'three books in cart' do
+      expect(new_cart).to have_css('.general-img-wrap-table', count: 3)
+    end
+
+    it 'left only two books' do
+      new_cart.delete_book.click
+      expect(new_cart).to have_css('.general-img-wrap-table', count: 2)
     end
   end
 end
