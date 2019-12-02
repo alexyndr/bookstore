@@ -22,15 +22,15 @@ class CartPageObject
     count.times { find('.fa-minus').click }
   end
 
-  def find_cover
+  def book_cover
     find('.general-img-wrap-table').find('a')
   end
 
-  def find_title
+  def book_title
     find('.title')
   end
 
-  def find_quantity
+  def book_quantity
     find_field('order_item[quantity]')
   end
 
@@ -47,7 +47,7 @@ class CartPageObject
     find('.text-center').find('.btn-default').click
   end
 
-  def delete_book
-    first('.general-cart-close')
+  def delete_book_btn
+    first('.delete-order-item')
   end
 end

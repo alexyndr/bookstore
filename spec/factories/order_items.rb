@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :order_item do
-    association(:book, price: 150)
+    association(:book)
     quantity { 1 }
   end
 end
