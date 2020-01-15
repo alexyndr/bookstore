@@ -61,7 +61,7 @@ end
 def generate_order
   order = Order.new(
     user_id: User.all.sample.id
-    )
+  )
   order.save!
 end
 

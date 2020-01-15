@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - checkout
-  
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -58,13 +58,24 @@ jobs:
           command: |
             bundle exec rspec --format RspecJunitFormatter
 
+      - run:
+          name: Install Lighthouse CI
+          command: sudo npm install -g @lhci/cli@0.3.x
+
+      - run:
+          name: lhci autorun
+          command: |
+            lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+
 
       # collect reports
       - store_test_results:
           path: /tmp/test-results
+
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+          when: always
 
 workflows:
   version: 2
