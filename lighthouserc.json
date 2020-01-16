@@ -1,7 +1,12 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:3000", "http://localhost::3000/books"]
+      "startServerCommand": "rails server -e production",
+      "url": [
+        "http://localhost:3000/",
+        "http://localhost:3000/books",
+        "http://localhost:3000/login"
+      ]
     },
     "upload": {
       "target": "temporary-public-storage"
