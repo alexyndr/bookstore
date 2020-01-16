@@ -1,15 +1,10 @@
 {
   "ci": {
     "collect": {
-      "numberOfRuns": 3,
-      "url": [
-        "http://localhost:3000/",
-        "http://localhost:3000/books",
-        "http://localhost:3000/login"
-      ]
+      "numberOfRuns": 3
     },
     "server": {
-      "port": 3000
+      "port": 9009
     },
     "upload": {
       "target": "temporary-public-storage"
