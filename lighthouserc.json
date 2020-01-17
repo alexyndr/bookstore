@@ -1,9 +1,6 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "http://localhost/"
-      ],
       "numberOfRuns": 3
     },
     "upload": {
