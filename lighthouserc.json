@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "url": [
-        "https://lit-spire-43064.herokuapp.com/"
+        "http://localhost/"
       ],
       "numberOfRuns": 3
     },
