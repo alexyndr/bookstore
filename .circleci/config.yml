@@ -65,9 +65,8 @@ jobs:
       - run:
           name: lhci autorun
           command: |
-            lhci autorun --collect.static-dist-dir=./ \
-            --collect.url=/books.html \
-            --collect.url=/index.html
+            lhci autorun --collect.static-dist-dir=./public \
+            --collect.url=http://localhost/books
 
 
       # collect reports
