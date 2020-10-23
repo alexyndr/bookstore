@@ -36,6 +36,10 @@ gem 'webpacker'
 gem 'wicked'
 gem "omniauth-rails_csrf_protection"
 
+group :production do
+  gem 'sendgrid-ruby'
+end
+
 group :development do
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
