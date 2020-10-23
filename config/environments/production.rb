@@ -74,7 +74,11 @@ Rails.application.configure do
 
   ActionMailer::Base.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: 'lit-spire-43064.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => "lit-spire-43064.herokuapp.com" }
+
+  config.action_mailer.perform_deliveries = true
+
+  # config.default_url_options = { host: "https://lit-spire-43064.herokuapp.com" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

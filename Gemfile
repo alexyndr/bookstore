@@ -60,6 +60,8 @@ end
 
 group :test do
   gem 'capybara'
+  # gem 'cucumber-rails'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'selenium-webdriver'
   gem 'simplecov'

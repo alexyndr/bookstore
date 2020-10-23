@@ -5,7 +5,6 @@
       %i.fa.fa-facebook-official
     %p.general-login-text or
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "general-form"}) do |f|
-    = devise_error_messages!
     .form-group.mb-30
       = f.label :email, class: "control-label input-label"
       = f.email_field :email, placeholder: t('devise.enter_email'), autofocus: true, autocomplete: "email", class: "form-control"
