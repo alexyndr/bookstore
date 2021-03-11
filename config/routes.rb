@@ -11,9 +11,13 @@ Rails.application.routes.draw do
   get  'settings', to: 'users#edit'
   get  'orders', to: 'orders#index'
 
-  get   'settings/addresses', to: 'addresses#edit'
-  post  'settings/addresses', to: 'addresses#create'
-  patch 'settings/addresses', to: 'addresses#update'
+#   get   'settings/addresses', to: 'addresses#edit'
+#   post  'settings/addresses', to: 'addresses#create'
+#   patch 'settings/addresses', to: 'addresses#update'
+  resources settings do
+    resources addresses, only: %i[create update]
+  end
+      
 
   resources :checkout
   resources :order_items, only: %i[create update destroy]
